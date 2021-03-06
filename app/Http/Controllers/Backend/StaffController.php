@@ -98,6 +98,7 @@ class StaffController extends Controller
     public function update(Request $request, Staff $staff)
     {   $data = $request->input('staff');
         if (!empty($request->file('image'))) {
+            $deleteImage  = $this->deleteOldImage($staff);
             $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
         }
         //$this->validation($request, $staff->id);
@@ -129,5 +130,13 @@ class StaffController extends Controller
         $this->validate($request,[
             'staff.name'  => "required:staffs,name," . $staff
         ]);
+    }
+    private function deleteOldImage($staff)
+    {
+        if ($staff->image) {
+            Storage::delete('/public/parishad/' . $staff->image);
+            return true;
+        }
+        return false;
     }
 }
