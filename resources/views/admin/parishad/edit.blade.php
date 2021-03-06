@@ -61,8 +61,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Image</label>
-                                <input type="file" value="{{$parishad->image}}" name="image" class="form-control" />
+                                <input type="file" name="image" class="form-control" />
+                                
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            @if(!empty($parishad->image))
+                            <img src={{ asset('storage/'. $parishad->image) }} style="width: 100px;">
+                            @endif
                         </div>
 
                     </div>

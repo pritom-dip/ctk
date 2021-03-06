@@ -55,7 +55,7 @@ class ParishadController extends Controller
 
         //Save feature image
         if (!empty($request->file('image'))) {
-            $data['image'] = Storage::putFile('upload/image', $request->file('image'));
+            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
         }
 
         Parishad::create($data);
@@ -107,7 +107,7 @@ class ParishadController extends Controller
         //Save feature image
         if (!empty($request->file('image'))) {
             $deleteImage  = $this->deleteOldImage($parishad);
-            $data['image'] = Storage::putFile('upload/image', $request->file('image'));
+            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
         }
 
         $parishad->update($data);
@@ -144,7 +144,7 @@ class ParishadController extends Controller
     private function deleteOldImage($parishad)
     {
         if ($parishad->image) {
-            Storage::delete('/public/images/' . $parishad->image);
+            Storage::delete('/public/parishad/' . $parishad->image);
             return true;
         }
         return false;
