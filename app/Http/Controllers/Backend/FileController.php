@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Model\Staff;
+use App\Model\File;
 use App\Http\Controllers\Controller;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 /*use App\Http\Controllers\Controller*/;
 
-class StaffController extends Controller
+class FileController extends Controller
 {
     private $path;
     private $model;
@@ -19,16 +20,16 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $query  = Staff::latest() ->where('status', 'a');
+        $query  = File::latest() -> where('status', 'a');
 
         if(!empty($request->field_name) && !empty($request->value)){
             $query->where($request->field_name,'like','%'.$request->value.'%');
         }
 
         $breadcumbs = $this->breadcumbs($this->model, 'index');
-        $staffs      = $query->paginate(10);
+        $datas      = $query->paginate(10);
 
-        return view( $this->path .'.index', compact('staffs', 'breadcumbs'));
+        return view( $this->path .'.index', compact('datas', 'breadcumbs'));
     }
 
     /**
@@ -38,8 +39,9 @@ class StaffController extends Controller
      */
     public function create()
     {
+        $category = Category::latest() -> get();
         $breadcumbs = $this->breadcumbs($this->model, 'create');
-        return view( $this->path . '.create', compact('breadcumbs'));
+        return view( $this->path . '.create', compact('category','breadcumbs'));
     }
 
     /**
@@ -50,13 +52,17 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->input('staff');
 
-        if (!empty($request->file('image'))) {
-            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
+        $file_data = $request -> data;
+
+        if (!empty($request->file('file'))) {
+            $file_data['path'] = Storage::putFile('upload/files', $request->file('file'));
         }
-       // $this->validation($request);
-        Staff::create($data);
+
+
+
+        //$this->validation($request);
+        File::create($file_data);
 
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model . ' successfully created');
@@ -65,78 +71,73 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(File $file)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'show');
 
-        return view($this->path .'.show', compact( "staff", "breadcumbs"));
+        return view($this->path .'.show', compact( "file", "breadcumbs"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(File $file)
     {
+        $category = Category::latest() -> get();
         $breadcumbs = $this->breadcumbs($this->model, 'edit');
         return view( $this->path . '.edit',
-                compact( "staff" , "breadcumbs"));
+                compact( "category","file" , "breadcumbs"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
-    {   $data = $request->input('staff');
-        if (!empty($request->file('image'))) {
-            $deleteImage  = $this->deleteOldImage($staff);
-            $data['image'] = Storage::putFile('upload/staff', $request->file('image'));
+    public function update(Request $request, File $file)
+    {
+        $file_data = $request -> data;
+
+        if (!empty($request->file('file'))) {
+            $file_data['path'] = Storage::putFile('upload/files', $request->file('file'));
         }
-        //$this->validation($request, $staff->id);
-        $staff->update($data);
+
+        //$this->validation($request, $file->id);
+        $file->update($file_data);
         return redirect()->back()->with('success', $this->model. ' Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(File $file)
     {
-        $staff->update(['status' => 'd']);
+        $file->delete(['status' => 'd']);
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model .' deleted');
     }
 
     public function __construct()
     {
-        $this->path  = "admin.staff";
-        $this->model = "Staff";
-        $this->route = "staff";
+        $this->path  = "admin.file";
+        $this->model = "File";
+        $this->route = "file";
     }
 
-    private function validation($request, $staff = null){
+    private function validation($request, $file = null){
         $this->validate($request,[
-            'staff.name'  => "required:staffs,name," . $staff
+            'name'  => "required|unique:files,name," . $file
         ]);
-    }
-    private function deleteOldImage($staff)
-    {
-        if ($staff->image) {
-            Storage::delete('/public/parishad/' . $staff->image);
-            return true;
-        }
-        return false;
     }
 }

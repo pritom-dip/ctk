@@ -8,7 +8,7 @@
 
         @if(App\Model\Permission::roleHasSpecificPermission('staff.create'))
         <div class="box-tools pull-right">
-            <a href="{{route('staff.create')}}" class="btn btn-xs btn-success pull-left text-white" title="Add New"><i class="fa fa-plus"></i> <span class="text-capitalize">Add Parishad Member</span></a>
+            <a href="{{route('staff.create')}}" class="btn btn-xs btn-success pull-left text-white" title="Add New"><i class="fa fa-plus"></i> <span class="text-capitalize">Add Staff</span></a>
         </div>
         @endif
 
