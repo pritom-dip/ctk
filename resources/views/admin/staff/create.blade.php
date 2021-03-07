@@ -62,7 +62,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">Joining date</label>
-                                <input  type="text" name="staff[joining_date]" class="form-control" />
+                                <input  type="text" name="staff[joining_date]" class="form-control datepicker" />
                             </div>
                         </div>
                         <!------------ Single Input ------------>

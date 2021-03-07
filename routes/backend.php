@@ -37,6 +37,11 @@ Route::prefix('/admin')->group(function () {
             Route::resource('parishad',            'ParishadController');
             // ------------------Staff------------------
             Route::resource('staff',            'StaffController');
+            // ------------------Staff------------------
+            Route::resource('shava',            'ShavaController');
+
+
+
         });
 
         //------------------------------- Admin Crud -------------------------------

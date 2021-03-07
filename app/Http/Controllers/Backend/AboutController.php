@@ -111,6 +111,7 @@ class AboutController extends Controller
 
         if (count($information) > 0) {
             $information = json_encode($information, true);
+
         }
 
         $about->update([

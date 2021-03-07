@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Model\Staff;
+use App\Model\Shava;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 /*use App\Http\Controllers\Controller*/;
 
-class StaffController extends Controller
+class ShavaController extends Controller
 {
     private $path;
     private $model;
@@ -19,16 +18,16 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $query  = Staff::latest() ->where('status', 'a');
+        $query  = Shava::latest();
 
         if(!empty($request->field_name) && !empty($request->value)){
             $query->where($request->field_name,'like','%'.$request->value.'%');
         }
 
         $breadcumbs = $this->breadcumbs($this->model, 'index');
-        $staffs      = $query->paginate(10);
+        $datas      = $query->paginate(10);
 
-        return view( $this->path .'.index', compact('staffs', 'breadcumbs'));
+        return view( $this->path .'.index', compact('datas', 'breadcumbs'));
     }
 
     /**
@@ -50,13 +49,8 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->input('staff');
-
-        if (!empty($request->file('image'))) {
-            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
-        }
-       // $this->validation($request);
-        Staff::create($data);
+        $this->validation($request);
+        Shava::create($request->all());
 
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model . ' successfully created');
@@ -65,78 +59,73 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Shava  $shava
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(Shava $shava)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'show');
 
-        return view($this->path .'.show', compact( "staff", "breadcumbs"));
+        return view($this->path .'.show', compact( "shava", "breadcumbs"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Shava  $shava
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(Shava $shava)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'edit');
         return view( $this->path . '.edit',
-                compact( "staff" , "breadcumbs"));
+                compact( "shava" , "breadcumbs"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Shava  $shava
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
-    {   $data = $request->input('staff');
-        if (!empty($request->file('image'))) {
-            $deleteImage  = $this->deleteOldImage($staff);
-            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
+    public function update(Request $request, Shava $shava)
+    {
+        $information = $request->input('information')[0]['information'];
+
+        if (count($information) > 0) {
+            $information = json_encode($information, true);
+
         }
-        //$this->validation($request, $staff->id);
-        $staff->update($data);
+
+        //$this->validation($request, $shava->id);
+        $shava->update(['data' => $information]);
         return redirect()->back()->with('success', $this->model. ' Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Shava  $shava
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(Shava $shava)
     {
-        $staff->update(['status' => 'd']);
+        $shava->delete();
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model .' deleted');
     }
 
     public function __construct()
     {
-        $this->path  = "admin.staff";
-        $this->model = "Staff";
-        $this->route = "staff";
+        $this->path  = "admin.shava";
+        $this->model = "Shava";
+        $this->route = "shava";
     }
 
-    private function validation($request, $staff = null){
+    private function validation($request, $shava = null){
         $this->validate($request,[
-            'staff.name'  => "required:staffs,name," . $staff
+            'name'  => "required|unique:shavas,name," . $shava
         ]);
-    }
-    private function deleteOldImage($staff)
-    {
-        if ($staff->image) {
-            Storage::delete('/public/parishad/' . $staff->image);
-            return true;
-        }
-        return false;
     }
 }
