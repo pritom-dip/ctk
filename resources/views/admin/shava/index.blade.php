@@ -19,8 +19,8 @@
 
     <!-- /.box-header -->
 <div class="box-body box-min-height">
-
-        <form class="form-row col-md-12 " method="POST" action="{{ route('shava.update',1) }}">
+    @foreach ($datas as $item)
+        <form class="form-row col-md-12 " method="POST" action="{{ route('shava.update',$item -> id) }}">
             @csrf
             @method('PUT')
                 <div class="repeater pl-3">
@@ -28,7 +28,7 @@
                         <div data-repeater-item>
                             <div class="inner-repeater">
                                 <div style="width: 40%; float:left" data-repeater-list="information">
-                                    @foreach ($datas as $item)
+
                                         @php
                                             $array = json_decode($item -> data);
                                         @endphp
@@ -50,7 +50,7 @@
                                             </div>
 
                                             @endforeach
-                                    @endforeach
+
                                 </div>
                                 <button style="float: left;margin-left:56px; margin-top:26px;" data-repeater-create type="button" class="btn btn-success btn-sm float-right my-3">Add New</button>
                                 <button style="float: left;margin-left:30px; margin-top:26px;" type="submit" class="btn btn-sm btn-info">SAVE</button>
@@ -59,6 +59,7 @@
                     </div>
                 </div>
         </form>
+        @endforeach
 
 
 </div>
