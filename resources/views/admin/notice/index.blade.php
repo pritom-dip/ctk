@@ -1,14 +1,14 @@
 @extends('admin.layouts.layout')
-@section('title', 'Files List')
+@section('title', 'Notice List')
 
 @section('content')
 
 <div class="box box-success">
     <div class="box-header with-border">
 
-        @if(App\Model\Permission::roleHasSpecificPermission('file.create'))
+        @if(App\Model\Permission::roleHasSpecificPermission('about.create'))
         <div class="box-tools pull-right">
-            <a href="{{route('file.create')}}" class="btn btn-xs btn-success pull-left text-white" title="Add New"><i class="fa fa-plus"></i> <span class="text-capitalize">Upload New</span></a>
+            <a href="{{route('notice.create')}}" class="btn btn-xs btn-success pull-left text-white" title="Add New"><i class="fa fa-plus"></i> <span class="text-capitalize">Add Notice</span></a>
         </div>
         @endif
 
@@ -16,13 +16,13 @@
 
     <!-- /.box-header -->
     <div class="box-body box-min-height">
-        <div class="table-responsive col-md-8">
+        <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped list-data">
                 <thead class="bg-purple text-white">
                     <tr>
                         <th class="serial">#</th>
-                        <th>File Name</th>
-                        <th>Category</th>
+                        <th>Notice Name</th>
+                        <th>Notice Headline</th>
 
                         <th class="action">Action</th>
                     </tr>
@@ -33,27 +33,27 @@
 
                     <tr>
                         <td>{{ $count + $datas->firstItem() }}</td>
-                        <td>{{ $item -> name }}</td>
-                        <td>{{ $item -> category -> name}}</td>
+                        <td>{!!$item->name !!}</td>
+                        <td>{!!$item->short_desc !!}</td>
 
 
                         <td>
 
-                            @if(App\Model\Permission::roleHasSpecificPermission('file.show'))
+                            @if(App\Model\Permission::roleHasSpecificPermission('about.show'))
 
-                        	<a href="{{route('file.show', $item->id)}}" class="btn btn-xs btn-success action-view" title="View"><i class="fa fa-eye"></i></a>
-
-                            @endif
-
-                            @if(App\Model\Permission::roleHasSpecificPermission('file.edit'))
-
-                        	<a href="{{route('file.edit', $item->id)}}" class="btn btn-xs btn-primary action-pencil" title="Edit"><i class="fa fa-pencil"></i></a>
+                        	<a href="{{route('notice.show', $item->id)}}" class="btn btn-xs btn-success action-view" title="View"><i class="fa fa-eye"></i></a>
 
                             @endif
 
-                            @if(App\Model\Permission::roleHasSpecificPermission('file.destroy'))
+                            @if(App\Model\Permission::roleHasSpecificPermission('about.edit'))
 
-                        	<form action="{{route('file.destroy', $item->id)}}" method="POST" class="d-inline-block">
+                        	<a href="{{route('notice.edit', $item->id)}}" class="btn btn-xs btn-primary action-pencil" title="Edit"><i class="fa fa-pencil"></i></a>
+
+                            @endif
+
+                            @if(App\Model\Permission::roleHasSpecificPermission('about.destroy'))
+
+                        	<form action="{{route('notice.destroy', $item->id)}}" method="POST" class="d-inline-block">
     						    @csrf
     						    @method('DELETE')
     						    <button class="btn btn-xs btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">

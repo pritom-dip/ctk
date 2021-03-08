@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title', 'List About')
+@section('title', 'Category List')
 
 @section('content')
 
@@ -21,7 +21,7 @@
                 <thead class="bg-purple text-white">
                     <tr>
                         <th class="serial">#</th>
-                        <th style="width: 180px;">Name</th>
+                        <th style="width: 180px;">Category Name</th>
                         <th>Files</th>
 
                         <th class="action">Action</th>

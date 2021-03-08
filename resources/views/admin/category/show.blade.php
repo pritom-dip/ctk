@@ -1,5 +1,5 @@
 @extends('admin.layouts.layout')
-@section('title', 'Show About ')
+@section('title', 'Show Category ')
 
 @section('content')
 
@@ -30,5 +30,5 @@
         </table>
     </div>
 </div>
-    
+
 @endsection

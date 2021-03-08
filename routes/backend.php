@@ -44,6 +44,8 @@ Route::prefix('/admin')->group(function () {
 
             // ------------------file------------------
             Route::resource('file',            'FileController');
+            // ------------------file------------------
+            Route::resource('notice',            'NoticeController');
 
 
 
