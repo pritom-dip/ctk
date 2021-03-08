@@ -22,6 +22,7 @@
                     <tr>
                         <th class="serial">#</th>
                         <th>Name</th>
+                        <th>Category</th>
 
                         <th class="action">Action</th>
                     </tr>
@@ -33,6 +34,7 @@
                     <tr>
                         <td>{{ $count + $datas->firstItem() }}</td>
                         <td>{{ $item -> name }}</td>
+                        <td>{{ $item -> category -> name}}</td>
 
 
                         <td>

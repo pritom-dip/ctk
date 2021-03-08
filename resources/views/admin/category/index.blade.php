@@ -16,12 +16,13 @@
 
     <!-- /.box-header -->
     <div class="box-body box-min-height">
-        <div class="table-responsive col-md-8">
+        <div class="table-responsive col-md-12">
             <table class="table table-bordered table-hover table-striped list-data">
                 <thead class="bg-purple text-white">
                     <tr>
                         <th class="serial">#</th>
-                        <th>Name</th>
+                        <th style="width: 180px;">Name</th>
+                        <th>Files</th>
 
                         <th class="action">Action</th>
                     </tr>
@@ -33,6 +34,11 @@
                     <tr>
                         <td>{{ $count + $datas->firstItem() }}</td>
                         <td>{{ $item -> name }}</td>
+                        <td>
+                        @foreach ($item -> files as $val)
+                        <i class="fa fa-folder-open" aria-hidden="true"><a href="{{route('file.show', $item->id)}}"> {{ $val -> name }}</a></i>
+                        @endforeach
+                        </td>
 
 
                         <td>
