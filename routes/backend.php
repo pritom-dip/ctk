@@ -44,8 +44,12 @@ Route::prefix('/admin')->group(function () {
 
             // ------------------file------------------
             Route::resource('file',            'FileController');
-            // ------------------file------------------
+            // ------------------nptice------------------
             Route::resource('notice',            'NoticeController');
+            // ------------------file------------------
+            Route::resource('homesetting',            'HomeSettingController');
+
+
 
 
 

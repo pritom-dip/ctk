@@ -81,6 +81,7 @@ $(document).on('change','input.upload_image',function(e){
     e.preventDefault()
     let id = $(this).attr('code')
 
+
     let product_photo = URL.createObjectURL(e.target.files[0])
 
     $("#new_"+id).attr('value',1)
