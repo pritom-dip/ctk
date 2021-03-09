@@ -92,8 +92,18 @@ class HomeSettingController extends Controller
     public function update(Request $request, HomeSetting $homeSetting)
     {   $data = $request->input('home');
 
-
-        $homeSetting->update($data);
+        dd( $data);
+        $homeSetting->update([
+            "site_name" => "test site",
+            "fb_url" => "test data",
+            "twiter_url" => "test data",
+            "linkdin_url" => "test data",
+            "google_url" => "test data",
+            "youtube_url" => "test data",
+            "mayor_name" => "test data",
+            "address" => "test data",
+            "app_url" => "test data",
+        ]);
         return redirect()->back()->with('success', $this->model. ' Updated Successfully');
     }
 

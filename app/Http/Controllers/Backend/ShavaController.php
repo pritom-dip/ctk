@@ -37,6 +37,7 @@ class ShavaController extends Controller
      */
     public function create()
     {
+
         $breadcumbs = $this->breadcumbs($this->model, 'create');
         return view( $this->path . '.create', compact('breadcumbs'));
     }
@@ -49,8 +50,16 @@ class ShavaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation($request);
-        Shava::create($request->all());
+        $information = $request->input('information')[0]['information'];
+
+        if (count($information) > 0) {
+            $information = json_encode($information, true);
+
+        }
+
+
+        //$this->validation($request);
+        Shava::create(['data' => $information]);
 
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model . ' successfully created');

@@ -16,10 +16,9 @@
         @endif --}}
 
     </div>
-
-    <!-- /.box-header -->
 <div class="box-body box-min-height">
-    @foreach ($datas as $item)
+@if ($datas -> count() > 0)
+        @foreach ($datas as $item)
         <form class="form-row col-md-12 " method="POST" action="{{ route('shava.update',$item -> id) }}">
             @csrf
             @method('PUT')
@@ -59,7 +58,39 @@
                     </div>
                 </div>
         </form>
-        @endforeach
+    @endforeach
+@else
+    <form class="form-row col-md-12 " method="POST" action="{{ route('shava.store') }}">
+        @csrf
+
+            <div class="repeater pl-3">
+                <div data-repeater-list="information">
+                    <div data-repeater-item>
+                        <div class="inner-repeater">
+                            <div style="width: 40%; float:left" data-repeater-list="information">
+                                <div data-repeater-item>
+                                    <div class="row mt-3">
+                                        <div class="col-md-11">
+                                            <div class="form-group">
+                                                <label for="inputRole">Service Name</label>
+                                                <input type="text" name="service" placeholder="Description" class="form-control form-control-sm" id="inputRole" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 pt-5 pl-0" style="padding-top: 26px;">
+                                            <div data-repeater-delete class="btn btn-sm btn-success btn-danger">Delete</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button style="float: left;margin-left:56px; margin-top:26px;" data-repeater-create type="button" class="btn btn-success btn-sm float-right my-3">Add New</button>
+                            <button style="float: left;margin-left:30px; margin-top:26px;" type="submit" class="btn btn-sm btn-info">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+@endif
 
 
 </div>
