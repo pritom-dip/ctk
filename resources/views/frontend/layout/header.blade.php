@@ -5,13 +5,13 @@
     ============================================= -->
     <header id="header" class="sticky-style-2" style="height:285px">
     <div class="container clearfix"
-         style="background: url(frontend_assets/images/top-banner.jpg) no-repeat; color: #fff;height:180px;background-size: 100% 180px;">
+         style="background: url({{ asset('frontend_assets/images/top-banner.jpg') }}) no-repeat; color: #fff;height:180px;background-size: 100% 180px;">
         <!-- Logo
         ============================================= -->
         <div id="logo" class="logo" style="margin-top: 28px;">
-            <a href="index.html" class="standard-logo" data-dark-logo="frontend_assets/assets/frontend_assets/images/mayor.jpg"><img
+            <a href="index.html" class="standard-logo" data-dark-logo="{{ asset('frontend_assets/assets/frontend_assets/images/mayor.jpg') }}"><img
                         class="divcenter" style="height: 102px; padding: 5px 0px 5px 0px;"
-                        src="frontend_assets/images/logo.png" alt="বেনাপোল পৌরসভা"></a>
+                        src="{{ asset('frontend_assets/images/logo.png') }}" alt="বেনাপোল পৌরসভা"></a>
         </div><!-- #logo end -->
         <div class="brand" style="margin-top: 30px;">
             <h3 class="title">বেনাপোল পৌরসভা</h3>
@@ -62,7 +62,7 @@
                     <li><a href="{{ route('notice') }}">নোটিশ</a></li>
                     <li><a href="{{ route('download') }}">ডাউনলোড</a></li>
 
-                    <li><a href="contact.html" class="btn btn-success" style="color:#fff;"> যোগাযোগ </a></li>
+                    <li><a href="{{ route('contact') }}" class="btn btn-success" style="color:#fff;"> যোগাযোগ </a></li>
                     <!--<li><a href="http://hajigonjpourashava.org/main/login" class="btn btn-success" style="color:#fff;"> Result</a></li>-->
                     <!--<li><a href="http://hajigonjpourashava.org/main/login" class="btn btn-success" style="color:#fff;"><i class="fa fa-user"></i> Login</a></li>-->
                 </ul>
@@ -79,8 +79,13 @@
             </div>
             <div class="col-md-10 no-padding-left">
                 <marquee behavior="" direction="" class="marq">
-                                            “পৌর কর সংক্রান্ত”
-                                    </marquee>
+                                            @php
+                                              $data = App\Model\Notice::latest() -> get();
+                                            @endphp
+                                                @foreach ($data as $val)
+                                                << <span style="margin-right: 25px; margin-left:25px;">{{ $val -> name }}</span>
+                                                @endforeach
+                </marquee>
             </div>
         </div>
 

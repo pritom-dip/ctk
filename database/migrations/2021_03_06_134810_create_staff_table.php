@@ -26,6 +26,7 @@ class CreateStaffTable extends Migration
             $table->string('joining_date', 150)->nullable();
             $table->string('office_phone', 150)->nullable();
             $table->string('personal_phone', 150)->nullable();
+            $table->string('email', 150)->nullable();
             $table->integer('Priority')->default(50);
             $table->string('image')->default('avatar.png');
             $table->enum('status', ['a', 'd'])->default('a');

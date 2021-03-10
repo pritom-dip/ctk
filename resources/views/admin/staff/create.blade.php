@@ -75,10 +75,17 @@
 
                         <!------------ Single Input ------------>
                         <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">Personal Phone</label>
-                            <input type="text" name="staff[personal_phone]" class="form-control" />
+                            <div class="form-group">
+                                <label class="control-label">Personal Phone</label>
+                                <input type="text" name="staff[personal_phone]" class="form-control" />
+                            </div>
                         </div>
+                        <!------------ Single Input ------------>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="control-label">email</label>
+                                <input type="text" name="staff[email]" class="form-control" />
+                            </div>
                         </div>
                         <!------------ Single Input ------------>
                         <div class="col-md-2">

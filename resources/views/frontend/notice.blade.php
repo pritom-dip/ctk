@@ -69,78 +69,22 @@
 ============================================= -->
 <section class="container">
 
+@foreach ($notice as $item)
 
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> “পৌর কর সংক্রান্ত” <span
+    <div class="notice notice-info">
+        <strong>হেডলাইন: </strong> “{{ $item -> name}}” <span
                 class="pull-right text-info readMore">বিস্তারিত </span>
         <div class="desc">
 
             <p>
-                নিয়মিত পৌর কর পরিশোধের মধ্য দিয়ে পৌরসভার উন্নয়নে সহায়তা করুন।
+                {{ $item -> short_desc }}
             </p>
-            <a href="notice/8.html">বিস্তারিত </a>
+            <a href="{{ route('notice.single',$item ->id) }}">বিস্তারিত </a>
         </div>
     </div>
 
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> জন্ম ও মৃত্যু নিবন্ধন নিশ্চিত করে, পৌর নাগরিক সুবিধা গ্রহণ করুন। <span
-                class="pull-right text-info readMore">বিস্তারিত </span>
-        <div class="desc">
+@endforeach
 
-            <p>
-                জন্ম ও মৃত্যু নিবন্ধন নিশ্চিত করে, পৌর নাগরিক সুবিধা গ্রহণ করুন।
-            </p>
-            <a href="notice/7.html">বিস্তারিত </a>
-        </div>
-    </div>
-
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> “কোভিট-19 (করোনা) ভাইরাস” <span
-                class="pull-right text-info readMore">বিস্তারিত </span>
-        <div class="desc">
-
-            <p>
-                কোভিট-19 (করোনা) ভাইরাস এর কারনে সরকারের সকল নির্দেশনা মেনে, বেনাপোল পৌরসভার সকল কার্যাদি চলমান আছে। আপনার নাগরিক সমস্যা সমাধানে বেনাপোল পৌরসভা সর্বদা আপনার পাশে আছে।
-            </p>
-            <a href="notice/6.html">বিস্তারিত </a>
-        </div>
-    </div>
-
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> “বেনাপোল পৌরসভার পানির সংযোগ ব্যবহারকারীগণ” <span
-                class="pull-right text-info readMore">বিস্তারিত </span>
-        <div class="desc">
-
-            <p>
-                বেনাপোল পৌরসভার পানির সংযোগ ব্যবহারকারীদের জানানো যাচ্ছে যে, গত মে-মার্চ/2020 খ্রি: 3 (তিন) মাসের সারচার্জ ব্যতিরেকে পানির বিল প্রদান করতে হবে। প্রয়োজনে আপনার পানির বিলটি নিয়ে বেনাপোল পৌরসভায় যোগাযোগ করার জন্য অনুরোধ করা হলো।
-            </p>
-            <a href="notice/5.html">বিস্তারিত </a>
-        </div>
-    </div>
-
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> “Benapole Paurashava স্মার্ট সিটি অ্যাপস এর মাধ্যমে পেশ করুন সকল নাগরিক জিজ্ঞাস “ <span
-                class="pull-right text-info readMore">বিস্তারিত </span>
-        <div class="desc">
-
-            <p>
-                Google Play Store থেকে Benapole Paurashava লিখে সার্চ করে স্মার্ট সিটি অ্যাপস ডাউনলোড করতে পারবেন।
-            </p>
-            <a href="notice/4.html">বিস্তারিত </a>
-        </div>
-    </div>
-
-            <div class="notice notice-info">
-        <strong>হেডলাইন: </strong> “ আপনার শহরকে ডেঙ্গুমুক্ত রাখতে, শহর পরিষ্কার পরিচ্ছন্ন রাখুন ” <span
-                class="pull-right text-info readMore">বিস্তারিত </span>
-        <div class="desc">
-
-            <p>
-                “ আপনার শহরকে ডেঙ্গুমুক্ত রাখতে, শহর পরিষ্কার পরিচ্ছন্ন রাখুন ”
-            </p>
-            <a href="notice/3.html">বিস্তারিত </a>
-        </div>
-    </div>
 
 
 </section><!-- #content end -->

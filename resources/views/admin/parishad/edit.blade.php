@@ -58,6 +58,13 @@
                             </div>
                         </div>
                         <!------------ Single Input ------------>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Address</label>
+                                <input type="text" value="{{$parishad->address}}" name="parishad[address]" class="form-control" />
+                            </div>
+                        </div>
+                        <!------------ Single Input ------------>
                         <div class="col-md-6">
                             <div class="form-group">
                                 @if(!empty($parishad->image))

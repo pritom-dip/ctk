@@ -18,18 +18,18 @@
 <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic"
       rel="stylesheet" type="text/css"/>
 
-<link rel="stylesheet" href="frontend_assets/assets/css/bootstrap.min.css" type="text/css"/>
-<link rel="stylesheet" href="frontend_assets/assets/css/main.css" type="text/css"/>
+<link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/bootstrap.min.css') }}" type="text/css"/>
+<link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/main.css') }}" type="text/css"/>
 
 
 
 <!-- External JavaScripts
 ============================================= -->
-<script type="text/javascript" src="frontend_assets/assets/js/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="frontend_assets/assets/styles.css"/>
+<script type="text/javascript" src="{{ asset('frontend_assets/assets/js/jquery.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend_assets/assets/styles.css') }}"/>
 
 
 <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="frontend_assets/css/custom.css">
+<link rel="stylesheet" href="{{ asset('frontend_assets/css/custom.css') }}">
 </head>

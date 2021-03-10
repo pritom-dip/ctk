@@ -1,11 +1,11 @@
 <!-- Footer Scripts
 ============================================= -->
-<script type="text/javascript" src="frontend_assets/assets/js/functions.js"></script>
-<link rel="stylesheet" href="frontend_assets/assets/slide_news/feed_slide.css"/>
+<script type="text/javascript" src="{{ asset('frontend_assets/assets/js/functions.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('frontend_assets/assets/slide_news/feed_slide.css') }}"/>
 
-<script src="frontend_assets/assets/slide_news/misc.js"></script>
-<script src="frontend_assets/assets/slide_news/sudo.js"></script>
-<script src="frontend_assets/assets/js/custom.js"></script>
+<script src="{{ asset("frontend_assets/assets/slide_news/misc.js") }}"></script>
+<script src="{{ asset('frontend_assets/assets/slide_news/sudo.js') }}"></script>
+<script src="{{ asset('frontend_assets/assets/js/custom.js') }}"></script>
 
 
 

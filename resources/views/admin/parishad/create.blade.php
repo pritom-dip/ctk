@@ -57,6 +57,13 @@
                             </div>
                         </div>
                         <!------------ Single Input ------------>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">address</label>
+                                <input type="text" name="parishad[address]" class="form-control" />
+                            </div>
+                        </div>
+                        <!------------ Single Input ------------>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label  for="pro_pic"><img id="up_44" width="150px" height="150px" style="cursor: pointer; border: 2px solid #3C8DBC; padding: 4px;" src="{{ URL::to('/')}}/admin_assets/defult_image/gallery.png" width="150px" alt=""></label>

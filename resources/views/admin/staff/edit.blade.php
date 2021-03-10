@@ -82,6 +82,13 @@
                             <input value="{{ $staff -> personal_phone}}" type="text" name="staff[personal_phone]" class="form-control" />
                         </div>
                         </div>
+                         <!------------ Single Input ------------>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">email</label>
+                                <input value="{{ $staff -> email}}" type="text" name="staff[email]" class="form-control" />
+                            </div>
+                            </div>
                         <!------------ Single Input ------------>
                         <div class="col-md-2">
                             @php

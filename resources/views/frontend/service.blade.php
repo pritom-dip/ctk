@@ -70,95 +70,17 @@
 <section class="container">
 
 <div class="col-md-6 col-md-offset-3">
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> নাগরিকত্ব সনদ
-        </div>
+        @php
+            $data = json_decode($service -> data);
+        @endphp
+        @foreach ($data as $item)
 
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> ওয়ারিশান সনদ
+        <div class="notice notice-info">
+            <strong>সেবা: </strong> {{$item -> service  }}
         </div>
+        @endforeach
 
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> চারিত্রিক সনদ
-        </div>
 
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> অবিবাহিত সনদ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> পৌর কর আদায়
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> পানির লাইন সংযোগ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> বিনামূল্যে কম্পিউটার প্রশিক্ষণ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> ষাটোর্ধ নাগরিকদের বিনামূল্যে স্বাস্থ্যসেবা ও ঔষধ প্রদান
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> সকল নাগরিকদের বিনামূল্যে স্বাস্থ্যসেবা প্রদান
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> দরিদ্র ও অসহায় নারীদের বিনামূল্যে হস্তশিল্প প্রশিক্ষণ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> শিক্ষা কর্ণার
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> স্পোর্টস কর্ণার
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> নতুন হোল্ডিং
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> জন্ম নিবন্ধন সনদ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> মৃত্যু নিবন্ধন সনদ
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> সড়ক বাতি স্থাপন/পুনঃস্থাপন
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> ট্রেড লাইসেন্স
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> ড্রেন পরিষ্কার
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> রিক্সা/ভ্যান লাইসেন্স
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> অটোরিক্সা লাইসেন্স
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> পৌর কবরস্থানে বেওয়ারিশ লাশ দাফন
-        </div>
-
-                    <div class="notice notice-info">
-            <strong>সেবা: </strong> নির্দিষ্ট স্থানে পশু জবাই
-        </div>
-
-            </div>
 
 
 </section>

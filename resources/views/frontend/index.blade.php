@@ -21,102 +21,24 @@
                                         <div id="feeds">
                                             <div class="feedlist testimonial_wrapp">
                                                 <ul>
-                                                                                                            <li>
+                                                    @foreach ($notice as $val)
+
+                                                        <li>
                                                             <div class="entry-c clearfix">
                                                                 <div class="entry-title">
 
                                                                     <h5>
-                                                                        <a href="notice/8.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            “পৌর কর সংক্রান্ত”
+                                                                        <a href="{{ route('notice.single',$val ->id) }}"><i class="fa fa-play"></i>
+                                                                           {{ $val -> name }}
                                                                         </a>
 
                                                                         <br>
-                                                                        <span class="meta"> -2020-08-26 05:01:49</span>
+                                                                        <span class="meta">{{ date('d F Y' ,strtotime($val -> created_at)) }}</span>
                                                                     </h5>
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                                                                            <li>
-                                                            <div class="entry-c clearfix">
-                                                                <div class="entry-title">
-
-                                                                    <h5>
-                                                                        <a href="notice/7.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            জন্ম ও মৃত্যু নিবন্ধন নিশ্চিত করে, পৌর নাগরিক সুবিধা গ্রহণ করুন।
-                                                                        </a>
-
-                                                                        <br>
-                                                                        <span class="meta"> -2020-08-26 04:59:26</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                                                                            <li>
-                                                            <div class="entry-c clearfix">
-                                                                <div class="entry-title">
-
-                                                                    <h5>
-                                                                        <a href="notice/6.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            “কোভিট-19 (করোনা) ভাইরাস”
-                                                                        </a>
-
-                                                                        <br>
-                                                                        <span class="meta"> -2020-07-13 06:52:59</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                                                                            <li>
-                                                            <div class="entry-c clearfix">
-                                                                <div class="entry-title">
-
-                                                                    <h5>
-                                                                        <a href="notice/5.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            “বেনাপোল পৌরসভার পানির সংযোগ ব্যবহারকারীগণ”
-                                                                        </a>
-
-                                                                        <br>
-                                                                        <span class="meta"> -2020-07-13 06:42:57</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                                                                            <li>
-                                                            <div class="entry-c clearfix">
-                                                                <div class="entry-title">
-
-                                                                    <h5>
-                                                                        <a href="notice/4.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            “Benapole Paurashava স্মার্ট সিটি অ্যাপস এর মাধ্যমে পেশ করুন সকল নাগরিক জিজ্ঞাস “
-                                                                        </a>
-
-                                                                        <br>
-                                                                        <span class="meta"> -2020-07-13 06:36:39</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                                                                            <li>
-                                                            <div class="entry-c clearfix">
-                                                                <div class="entry-title">
-
-                                                                    <h5>
-                                                                        <a href="notice/3.html"><i
-                                                                                    class="fa fa-play"></i>
-                                                                            “ আপনার শহরকে ডেঙ্গুমুক্ত রাখতে, শহর পরিষ্কার পরিচ্ছন্ন রাখুন ”
-                                                                        </a>
-
-                                                                        <br>
-                                                                        <span class="meta"> -2020-07-13 06:35:17</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                    @endforeach
 
                                                 </ul>
                                             </div>
@@ -133,28 +55,28 @@
                                             <li class="has-sub"><a
                                                         href="#"><span>পৌরসভা সম্পর্কে</span></a>
                                                 <ul class="mainList">
-                                                    <li><a href="about.html">এক নজরে
+                                                    <li><a href="{{ route('about') }}">এক নজরে
                                                             পৌরসভা </a></li>
-                                                    <li><a href="structure.html">সাংগঠনিক কাঠামো</a>
+                                                    <li><a href="{{ route('structure') }}">সাংগঠনিক কাঠামো</a>
                                                     </li>
                                                     <!-- <span class="ajax_list">
                                                                                </span>-->
                                                 </ul>
                                             </li>
-                                            <li class="last"><a href="parishad.html"><span>পৌর পরিষদ</span></a>
+                                            <li class="last"><a href="{{ route('parishad') }}"><span>পৌর পরিষদ</span></a>
                                             </li>
 
-                                            <li class="last"><a href="staff.html"><span>কর্মকর্তা/কর্মচারীবৃন্দ</span></a>
+                                            <li class="last"><a href="{{ route('staff') }}"><span>কর্মকর্তা/কর্মচারীবৃন্দ</span></a>
                                             </li>
                                             <!--rite sitebar menue -->
                                             <li class="last"><a
-                                                        href="service.html"><span>সেবাসমূহ</span></a>
+                                                        href="{{ route('service') }}"><span>সেবাসমূহ</span></a>
                                             </li>
 
                                             <!--<li class="last"><a href="http://hajigonjpourashava.org/main/contact"><span>CONTACT US</span></a></li> -->
-                                            <li class="last"><a href="notice.html"><span>নোটিশ</span></a></li>
+                                            <li class="last"><a href="{{ route('notice') }}"><span>নোটিশ</span></a></li>
                                             <!-- <li class="last"><a href="http://hajigonjpourashava.org/pages/view/notice_board"><span>ALL NOTICE</span></a></li> -->
-                                            <li class="last"><a href="download.html"><span>ডাউনলোড</span></a></li>
+                                            <li class="last"><a href="{{ route('download') }}"><span>ডাউনলোড</span></a></li>
 
                                         </ul>
 
@@ -237,13 +159,10 @@
                                         <h3 class="panel-title">HONORABLE MINISTER </h3>
                                     </div>
                                     <div class="panel-body">
-                                        <p>বাংলাদেশের দক্ষিণ-পশ্চিমাঞ্চলের যশোর জেলার শার্শা উপজেলার ভারতীয় সীমান্তজুড়ে
-                                            বেনাপোল পৌরসভার অবস্থান। ২০০৬ সালের ০৫ জানুয়ারী বেনাপোল পৌরসভা গঠিত হয় এবং
-                                            একই বছরের ১৬ এপ্রিল প্রশাসক নিয়োগের মাধ্যমে আনুষ্ঠানিকভাবে পৌরসভার কার্যক্রম
-                                            শুরু হয়। প্রতিষ্ঠার মাত্র ০৪ বছরের মাথায় ইংরেজী ০১/১২/২০১০ ইং তারিখ সরকারী
-                                            প্রজ্ঞাপনে পৌরসভাকে গ শ্রেণি হতে খ শ্রেণিতে উন্নীত করা হয়। বাংলাদেশের
-                                            সর্ববৃহৎ স্থলবন্দর এখানে অবস্থিত। এছাড়াও এখানে রয়েছে একটি রেলস্টেশন,পর্যটন
-                                            মোটেল,ফায়ার সার্ভিস স্টেশন,বিজিবি ক্যাম্পসহ ১২টি ব্যাংকের শাখা।</p>
+
+
+                                        {!!$about->description !!}
+
                                     </div>
                                 </div>
 
