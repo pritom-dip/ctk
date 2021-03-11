@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Model\Staff;
+use App\Model\Slider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 /*use App\Http\Controllers\Controller*/;
 
-class StaffController extends Controller
+class SliderController extends Controller
 {
     private $path;
     private $model;
@@ -19,16 +19,16 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $query  = Staff::latest() ->where('status', 'a');
+        $query  = Slider::latest();
 
         if(!empty($request->field_name) && !empty($request->value)){
             $query->where($request->field_name,'like','%'.$request->value.'%');
         }
 
         $breadcumbs = $this->breadcumbs($this->model, 'index');
-        $staffs      = $query->paginate(10);
+        $datas      = $query->paginate(10);
 
-        return view( $this->path .'.index', compact('staffs', 'breadcumbs'));
+        return view( $this->path .'.index', compact('datas', 'breadcumbs'));
     }
 
     /**
@@ -50,93 +50,100 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->input('staff');
+        if($request -> hasFile('photo')){
 
-        if (!empty($request->file('image'))) {
-            $data['image'] = Storage::putFile('upload/staff', $request->file('image'));
-        }
-       // $this->validation($request);
-        Staff::create($data);
+            $count = count($request -> photo);
+            $imag = $request -> photo;
 
-        return redirect()->route( $this->route . '.index')
-                ->with('success', $this->model . ' successfully created');
+           for ($i=0; $i < $count; $i++) {
+
+                    $data= Storage::putFile('upload/sliders', $imag[$i]);
+                    //$this->validation($request);
+                    Slider::create(['image' => $data]);
+
+                    }
+                    return redirect()->route( $this->route . '.index')
+                            ->with('success', $this->model . ' successfully created');
+        }else{
+                return redirect()->route( $this->route . '.create')
+                        ->with('error', $this->model . 'Image Fild is empty');
+            }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(Slider $slider)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'show');
 
-        return view($this->path .'.show', compact( "staff", "breadcumbs"));
+        return view($this->path .'.show', compact( "slider", "breadcumbs"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(Slider $slider)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'edit');
         return view( $this->path . '.edit',
-                compact( "staff" , "breadcumbs"));
+                compact( "slider" , "breadcumbs"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
-    {   $data = $request->input('staff');
+    public function update(Request $request, Slider $slider)
+    {
+
         if (!empty($request->file('image'))) {
-            $deleteImage  = $this->deleteOldImage($staff);
-            $data['image'] = Storage::putFile('upload/staff', $request->file('image'));
+            $data = Storage::putFile('upload/sliders', $request->file('image'));
+
+            $slider->update(['image' => $data]);
+            return redirect()->back()->with('success', $this->model. ' Updated Successfully');
+        }else{
+            return redirect()->back()->with('error', $this->model. 'Nothing to update');
         }
-        //$this->validation($request, $staff->id);
-        $staff->update($data);
-        return redirect()->back()->with('success', $this->model. ' Updated Successfully');
+
+
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Staff  $staff
+     * @param  \App\Model\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(Slider $slider)
     {
-        $staff->update(['status' => 'd']);
+        $slider->delete();
         return redirect()->route( $this->route . '.index')
                 ->with('success', $this->model .' deleted');
     }
 
     public function __construct()
     {
-        $this->path  = "admin.staff";
-        $this->model = "Staff";
-        $this->route = "staff";
+        $this->path  = "admin.sliders";
+        $this->model = "Slider";
+        $this->route = "slider";
     }
 
-    private function validation($request, $staff = null){
+    private function validation($request, $slider = null){
         $this->validate($request,[
-            'staff.name'  => "required:staffs,name," . $staff
+            'name'  => "required|unique:sliders,name," . $slider
         ]);
-    }
-    private function deleteOldImage($staff)
-    {
-        if ($staff->image) {
-            Storage::delete('/public/parishad/' . $staff->image);
-            return true;
-        }
-        return false;
     }
 }

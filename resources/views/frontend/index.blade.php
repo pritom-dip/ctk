@@ -101,42 +101,11 @@
                                         <div class="flexslider">
                                             <div class="slider-wrap">
 
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1574572339.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1574572440.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1594618269.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1594619096.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1594619147.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1594621580.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
-                                                    <div class="slide"><img class="image_fade" style="height: 360px;"
-                                                                            src="frontend_assets/images/slider/slider1594621666.jpg"
-                                                                            alt="Standard Post with Gallery"></div>
-
-
+                                                @foreach ($slider as $item)
+                                                    <div class="slide">
+                                                        <img class="image_fade" style="height: 360px;" src="{{ asset('storage/'. $item -> image) }}" alt="Standard Post with Gallery">
+                                                    </div>
+                                                @endforeach
 
                                             </div>
                                         </div>
@@ -222,154 +191,14 @@
     <div class="container">
         <h2>ফটো গ্যালারি </h2>
         <hr>
-
-                    <div class="col-md-3">
+        @foreach ($gallery as $item)
+            <div class="col-md-3">
                 <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572480.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
+                    <img src="{{ asset('storage/'. $item -> image) }}" style="height:200px; width:250px;"
+                        class="img-responsive img-rounded"/>
                 </div>
             </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572490.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572502.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572512.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572522.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572580.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572592.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572631.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572656.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574572675.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574573070.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1574574456.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594618058.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594619647.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594619690.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622710.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622737.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622788.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622841.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622875.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
-                    <div class="col-md-3">
-                <div class="thumbnail">
-                    <img src="frontend_assets/images/gallery/img1594622919.jpg" style="height:200px; width:250px;"
-                         class="img-responsive img-rounded"/>
-                </div>
-            </div>
-
+        @endforeach
 
     </div>
 @endsection

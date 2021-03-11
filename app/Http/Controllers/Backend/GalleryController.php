@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\model\Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -48,11 +49,27 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation($request);
-        Gallery::create($request->all());
+        if($request -> hasFile('photo')){
 
-        return redirect()->route($this->route . '.index')
-            ->with('success', $this->model . ' successfully created');
+            $count = count($request -> photo);
+            $imag = $request -> photo;
+
+           for ($i=0; $i < $count; $i++) {
+
+                    $data= Storage::putFile('upload/Gallerys', $imag[$i]);
+                    //$this->validation($request);
+                    Gallery::create(['image' => $data]);
+
+                    }
+                    return redirect()->route( $this->route . '.index')
+                            ->with('success', $this->model . ' successfully created');
+        }else{
+                return redirect()->route( $this->route . '.create')
+                        ->with('error', $this->model . 'Image Fild is empty');
+            }
+
+
+
     }
 
     /**
@@ -92,9 +109,17 @@ class GalleryController extends Controller
      */
     public function update(Request $request, Gallery $gallery)
     {
-        $this->validation($request, $gallery->id);
-        $gallery->update($request->all());
-        return redirect()->back()->with('success', $this->model . ' Updated Successfully');
+        if (!empty($request->file('image'))) {
+            $data = Storage::putFile('upload/Gallerys', $request->file('image'));
+
+            $gallery->update(['image' => $data]);
+            return redirect()->back()->with('success', $this->model. ' Updated Successfully');
+        }else{
+            return redirect()->back()->with('error', $this->model. 'Nothing to update');
+        }
+        // $this->validation($request, $gallery->id);
+        // $gallery->update($request->all());
+        // return redirect()->back()->with('success', $this->model . ' Updated Successfully');
     }
 
     /**
@@ -112,9 +137,9 @@ class GalleryController extends Controller
 
     public function __construct()
     {
-        $this->path  = "admin.";
+        $this->path  = "admin.gallery";
         $this->model = "Gallery";
-        $this->route = "Gallery";
+        $this->route = "gallery";
     }
 
     private function validation($request, $gallery = null)

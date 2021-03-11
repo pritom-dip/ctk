@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Model\About;
 use App\Model\Category;
 use App\Model\File;
+use App\model\Gallery;
 use App\Model\Notice;
 use App\Model\Parishad;
 use App\Model\Shava;
+use App\Model\Slider;
 use App\Model\Staff;
 use Illuminate\Http\Request;
 
@@ -16,9 +18,11 @@ class forntendController extends Controller
 {
     // ---------home-----------
     public function home(){
+        $slider = Slider::latest() -> get();
+        $gallery = Gallery::latest() -> get();
         $notice = Notice::latest() -> get();
         $about = About::latest() -> first();
-        return view('frontend.index',compact('about','notice'));
+        return view('frontend.index',compact('about','notice','slider','gallery'));
     }
     // ---------about-----------
     public function about(){

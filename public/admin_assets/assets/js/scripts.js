@@ -87,3 +87,6 @@ $(document).on('change','input.upload_image',function(e){
     $("#new_"+id).attr('value',1)
     $('#'+id).attr('src',product_photo)
 });
+
+
+

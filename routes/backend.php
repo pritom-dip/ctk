@@ -52,6 +52,8 @@ Route::prefix('/admin')->group(function () {
 
             // ------------------gallery------------------
             Route::resource('gallery',            'GalleryController');
+            // ------------------slider------------------
+            Route::resource('slider',            'SliderController');
         });
 
         //------------------------------- Admin Crud -------------------------------
