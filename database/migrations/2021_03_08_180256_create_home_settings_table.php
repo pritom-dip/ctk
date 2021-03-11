@@ -15,18 +15,19 @@ class CreateHomeSettingsTable extends Migration
     {
         Schema::create('home_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('logo') -> nullable();
-            $table->string('site_name') -> nullable();
-            $table->string('mayor_name') -> nullable();
-            $table->string('mayor_image') -> nullable();
-            $table->string('app_image') -> nullable();
-            $table->string('app_url') -> nullable();
-            $table->string('fb_url') -> nullable();
-            $table->string('twiter_url') -> nullable();
-            $table->string('linkdin_url') -> nullable();
-            $table->string('google_url') -> nullable();
-            $table->string('youtube_url') -> nullable();
-            $table->string('address') -> nullable();
+            $table->string('logo')->nullable();
+            $table->string('site_name')->nullable();
+            $table->string('mayor_name')->nullable();
+            $table->string('mayor_image')->nullable();
+            $table->string('cover_pic')->nullable();
+            $table->string('app_image')->nullable();
+            $table->string('app_url')->nullable();
+            $table->string('fb_url')->nullable();
+            $table->string('twiter_url')->nullable();
+            $table->string('linkdin_url')->nullable();
+            $table->string('google_url')->nullable();
+            $table->string('youtube_url')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

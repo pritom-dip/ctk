@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2021 at 07:53 AM
+-- Generation Time: Mar 11, 2021 at 06:24 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -71,8 +71,22 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `image`, `role_id`, `block`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin User', 'Admin', 'admin@gmail.com', NULL, '$2y$10$xVSRN32XUWseVtIiGER5auYNjZPwIufIP2Uy40rzP5vdQSRRpuLs2', '1234567890', 'Sylhet', 'beckham.jpg', 1, 0, 'a', 'IdBTE4XukOqQ7O5BXxodElkn7KsScD86UbX6NAWbdkjXjljCjGJUio6n5UmO', NULL, '2021-03-05 13:00:37'),
+(1, 'Admin User', 'Admin', 'admin@gmail.com', NULL, '$2y$10$xVSRN32XUWseVtIiGER5auYNjZPwIufIP2Uy40rzP5vdQSRRpuLs2', '1234567890', 'Sylhet', 'beckham.jpg', 1, 0, 'a', '462gTAyXYJrtxCEkEtmDFrkmmpYPMytIeFBPwyxKb8flqAMh4CYI2nKmsYEK', NULL, '2021-03-05 13:00:37'),
 (2, 'New Admin', 'new admin', 'new@admin.com', NULL, '$2y$10$XhGYM92ax2ynnTVYxI5Dr.JMbLoV6nr2/An2/jJybwqS/a0tWWLB.', '1234567890', NULL, NULL, 1, 0, 'a', NULL, '2021-02-27 23:50:35', '2021-02-27 23:50:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `serial` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -99,7 +113,14 @@ INSERT INTO `dominions` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (17, 'Process', '2020-06-04 03:04:11', '2020-06-04 03:04:11'),
 (19, 'Menu', '2020-06-05 02:11:40', '2020-06-19 02:35:47'),
 (72, 'About', '2021-03-05 13:11:52', '2021-03-05 13:11:52'),
-(73, 'Parishad', '2021-03-05 14:16:28', '2021-03-05 14:16:28');
+(73, 'Parishad', '2021-03-05 14:16:28', '2021-03-05 14:16:28'),
+(74, 'Notice', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(75, 'Shava', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(76, 'Staff', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(77, 'Category', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(78, 'File', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(79, 'HomeSetting', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(80, 'Gallery', '2021-03-11 11:21:01', '2021-03-11 11:21:01');
 
 -- --------------------------------------------------------
 
@@ -115,6 +136,66 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('a','d') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'a',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `galleries`
+--
+
+CREATE TABLE `galleries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_settings`
+--
+
+CREATE TABLE `home_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mayor_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mayor_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `app_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `app_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fb_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twiter_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkdin_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `google_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_pic` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `home_settings`
+--
+
+INSERT INTO `home_settings` (`id`, `logo`, `site_name`, `mayor_name`, `mayor_image`, `app_image`, `app_url`, `fb_url`, `twiter_url`, `linkdin_url`, `google_url`, `youtube_url`, `address`, `cover_pic`, `created_at`, `updated_at`) VALUES
+(1, 'upload/sites/4S9j1td5j7HvnYaPpc5IY82v3SUFomEopKBkFIUa.jpg', 'Chhatak Paurashavaa', 'yu', 'upload/sites/XQkyEs6gufhul9ITv5jYHZqa0wbR4SzmsUn8ATd7.jpg', 'upload/sites/llT2SVwERmGcn6y4j9fOOhTw1M72yWwlOcx9RjNL.jpg', 'io', 'q', 'w', 'e', 'r', 't', 'i', 'upload/sites/TD7Z0GxkdpsJeJZVtALDZU9FdlAZ4ZdMqDoZKAUc.jpg', '2021-03-11 10:49:02', '2021-03-11 11:12:36');
 
 -- --------------------------------------------------------
 
@@ -151,7 +232,14 @@ INSERT INTO `menus` (`id`, `parent_id`, `dominion_id`, `process_id`, `name`, `pa
 (7, NULL, 1, 1, 'Admins', NULL, '<i class=\"fa fa-users\"></i>', 'admin.index', 'admin', 49, '2020-06-07 11:02:26', '2020-06-29 07:51:03'),
 (11, NULL, NULL, NULL, 'Master Setup', NULL, '<i class=\"fa fa-asterisk\" aria-hidden=\"true\"></i>', NULL, 'admin', 1, '2020-06-19 07:54:59', '2020-06-29 07:51:53'),
 (61, NULL, 72, 330, 'About', NULL, '<i class=\"fa fa-user-circle-o\" aria-hidden=\"true\"></i>', 'about.index', 'admin', 5, '2021-03-05 13:14:05', '2021-03-05 13:14:05'),
-(62, NULL, 73, 337, 'Parishad', NULL, '<i class=\"fa fa-users\"></i>', 'parishad.index', 'admin', 5, '2021-03-05 14:17:59', '2021-03-05 14:17:59');
+(62, NULL, 73, 337, 'Parishad', NULL, '<i class=\"fa fa-users\"></i>', 'parishad.index', 'admin', 5, '2021-03-05 14:17:59', '2021-03-05 14:17:59'),
+(63, NULL, 74, 344, 'Notice', NULL, '<i class=\"fa fa-circle-o\"></i>', 'notice.index', 'admin', 8, '2021-03-08 23:41:29', '2021-03-08 23:41:29'),
+(64, NULL, 75, 351, 'Sheba', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'shava.index', 'admin', 12, '2021-03-08 23:42:12', '2021-03-08 23:42:12'),
+(65, NULL, 76, 358, 'Staff', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'staff.index', 'admin', 15, '2021-03-08 23:46:12', '2021-03-08 23:46:12'),
+(66, NULL, 77, 365, 'Category', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'category.index', 'admin', 30, '2021-03-08 23:49:44', '2021-03-08 23:49:44'),
+(67, NULL, 78, 372, 'Download', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'file.index', 'admin', 20, '2021-03-08 23:52:06', '2021-03-08 23:52:06'),
+(68, NULL, 79, 379, 'Home', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'homesetting.index', 'admin', 18, '2021-03-11 07:54:45', '2021-03-11 07:54:45'),
+(69, NULL, 80, 387, 'PhotoGallery', NULL, '<i class=\"fa fa-circle-o text-aqua\"></i>', 'gallery.index', 'admin', 25, '2021-03-11 11:21:54', '2021-03-11 11:21:54');
 
 -- --------------------------------------------------------
 
@@ -180,7 +268,30 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (57, '2020_06_01_072036_create_roles_table', 17),
 (58, '2014_10_12_000000_create_users_table', 18),
 (59, '2021_03_05_190537_create_abouts_table', 19),
-(64, '2021_03_05_201613_create_parishads_table', 20);
+(64, '2021_03_05_201613_create_parishads_table', 20),
+(65, '2021_03_06_134810_create_staff_table', 21),
+(66, '2021_03_07_075713_create_shavas_table', 21),
+(67, '2021_03_07_180242_create_categories_table', 21),
+(68, '2021_03_07_190317_create_files_table', 21),
+(69, '2021_03_08_135336_create_notices_table', 21),
+(70, '2021_03_08_180256_create_home_settings_table', 22),
+(71, '2021_03_11_172010_create_galleries_table', 23);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notices`
+--
+
+CREATE TABLE `notices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `short_desc` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `long_desc` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `serial` int(11) NOT NULL DEFAULT 50,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -243,7 +354,7 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `role_id`, `permissions`, `created_at`, `updated_at`) VALUES
-(9, 1, '[\"{\\\"id\\\":1,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"admin.index\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-03T16:01:42.000000Z\\\"}\",\"{\\\"id\\\":2,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"admin.create\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":3,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"admin.store\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":4,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"admin.show\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":5,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"admin.edit\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":6,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"admin.update\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":7,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"admin.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":37,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"profile\\\",\\\"route_name\\\":\\\"admin.profile\\\",\\\"created_at\\\":\\\"2020-06-03T15:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-03T15:45:31.000000Z\\\"}\",\"{\\\"id\\\":66,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"updateProfile\\\",\\\"route_name\\\":\\\"admin.updateprofile\\\",\\\"created_at\\\":\\\"2020-06-05T09:35:42.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-05T09:35:42.000000Z\\\"}\",\"{\\\"id\\\":82,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"changePassword\\\",\\\"route_name\\\":\\\"admin.changepassword\\\",\\\"created_at\\\":\\\"2020-06-19T13:46:30.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T13:46:30.000000Z\\\"}\",\"{\\\"id\\\":8,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"role.index\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":9,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"role.create\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":10,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"role.store\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":11,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"role.show\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":12,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"role.edit\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":13,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"role.update\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":14,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"role.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":30,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"permission.index\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:39.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:39.000000Z\\\"}\",\"{\\\"id\\\":31,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"permission.create\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":32,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"permission.store\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":33,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"permission.show\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":34,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"permission.edit\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":35,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"permission.update\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":36,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"permission.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":38,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"dominion.index\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":39,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"dominion.create\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":40,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"dominion.store\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":41,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"dominion.show\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":42,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"dominion.edit\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":43,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"dominion.update\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":44,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"dominion.destroy\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":45,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"process.index\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":46,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"process.create\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":47,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"process.store\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":48,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"process.show\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":49,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"process.edit\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":50,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"process.update\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":51,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"process.destroy\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":52,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"menu.index\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":53,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"menu.create\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":54,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"menu.store\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":55,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"menu.show\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":56,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"menu.edit\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":57,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"menu.update\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":58,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"menu.destroy\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":330,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"about.index\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":331,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"about.create\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":332,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"about.store\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":333,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"about.show\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":334,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"about.edit\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":335,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"about.update\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":336,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"about.destroy\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":337,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"parishad.index\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":338,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"parishad.create\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":339,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"parishad.store\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":340,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"parishad.show\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":341,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"parishad.edit\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":342,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"parishad.update\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":343,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"parishad.destroy\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\"]', NULL, '2021-03-05 14:16:38');
+(9, 1, '[\"{\\\"id\\\":1,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"admin.index\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-03T16:01:42.000000Z\\\"}\",\"{\\\"id\\\":2,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"admin.create\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":3,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"admin.store\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":4,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"admin.show\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":5,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"admin.edit\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":6,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"admin.update\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":7,\\\"dominion_id\\\":1,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"admin.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:00:24.000000Z\\\"}\",\"{\\\"id\\\":37,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"profile\\\",\\\"route_name\\\":\\\"admin.profile\\\",\\\"created_at\\\":\\\"2020-06-03T15:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-03T15:45:31.000000Z\\\"}\",\"{\\\"id\\\":66,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"updateProfile\\\",\\\"route_name\\\":\\\"admin.updateprofile\\\",\\\"created_at\\\":\\\"2020-06-05T09:35:42.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-05T09:35:42.000000Z\\\"}\",\"{\\\"id\\\":82,\\\"dominion_id\\\":1,\\\"guard\\\":null,\\\"name\\\":\\\"changePassword\\\",\\\"route_name\\\":\\\"admin.changepassword\\\",\\\"created_at\\\":\\\"2020-06-19T13:46:30.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T13:46:30.000000Z\\\"}\",\"{\\\"id\\\":8,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"role.index\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":9,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"role.create\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":10,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"role.store\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":11,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"role.show\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":12,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"role.edit\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":13,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"role.update\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":14,\\\"dominion_id\\\":2,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"role.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T15:01:49.000000Z\\\"}\",\"{\\\"id\\\":30,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"permission.index\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:39.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:39.000000Z\\\"}\",\"{\\\"id\\\":31,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"permission.create\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":32,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"permission.store\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":33,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"permission.show\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":34,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"permission.edit\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":35,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"permission.update\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":36,\\\"dominion_id\\\":14,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"permission.destroy\\\",\\\"created_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-01T17:53:40.000000Z\\\"}\",\"{\\\"id\\\":38,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"dominion.index\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":39,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"dominion.create\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":40,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"dominion.store\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":41,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"dominion.show\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":42,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"dominion.edit\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":43,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"dominion.update\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":44,\\\"dominion_id\\\":16,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"dominion.destroy\\\",\\\"created_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:03:54.000000Z\\\"}\",\"{\\\"id\\\":45,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"process.index\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":46,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"process.create\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":47,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"process.store\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":48,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"process.show\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":49,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"process.edit\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":50,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"process.update\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":51,\\\"dominion_id\\\":17,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"process.destroy\\\",\\\"created_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-04T09:04:11.000000Z\\\"}\",\"{\\\"id\\\":52,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"menu.index\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":53,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"menu.create\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":54,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"menu.store\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":55,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"menu.show\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":56,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"menu.edit\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":57,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"menu.update\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":58,\\\"dominion_id\\\":19,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"menu.destroy\\\",\\\"created_at\\\":\\\"2020-06-05T08:11:40.000000Z\\\",\\\"updated_at\\\":\\\"2020-06-19T08:35:47.000000Z\\\"}\",\"{\\\"id\\\":330,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"about.index\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":331,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"about.create\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":332,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"about.store\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":333,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"about.show\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":334,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"about.edit\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":335,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"about.update\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":336,\\\"dominion_id\\\":72,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"about.destroy\\\",\\\"created_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T19:11:52.000000Z\\\"}\",\"{\\\"id\\\":337,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"parishad.index\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":338,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"parishad.create\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":339,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"parishad.store\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":340,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"parishad.show\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":341,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"parishad.edit\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":342,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"parishad.update\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":343,\\\"dominion_id\\\":73,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"parishad.destroy\\\",\\\"created_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-05T20:16:28.000000Z\\\"}\",\"{\\\"id\\\":344,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"notice.index\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":345,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"notice.create\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":346,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"notice.store\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":347,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"notice.show\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":348,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"notice.edit\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":349,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"notice.update\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":350,\\\"dominion_id\\\":74,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"notice.destroy\\\",\\\"created_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:39:53.000000Z\\\"}\",\"{\\\"id\\\":351,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"shava.index\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":352,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"shava.create\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":353,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"shava.store\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":354,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"shava.show\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":355,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"shava.edit\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":356,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"shava.update\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":357,\\\"dominion_id\\\":75,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"shava.destroy\\\",\\\"created_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:40:37.000000Z\\\"}\",\"{\\\"id\\\":358,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"staff.index\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":359,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"staff.create\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":360,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"staff.store\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":361,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"staff.show\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":362,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"staff.edit\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":363,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"staff.update\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":364,\\\"dominion_id\\\":76,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"staff.destroy\\\",\\\"created_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:45:31.000000Z\\\"}\",\"{\\\"id\\\":365,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"category.index\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":366,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"category.create\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":367,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"category.store\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":368,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"category.show\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":369,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"category.edit\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":370,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"category.update\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":371,\\\"dominion_id\\\":77,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"category.destroy\\\",\\\"created_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:48:38.000000Z\\\"}\",\"{\\\"id\\\":372,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"file.index\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":373,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"file.create\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":374,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"file.store\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":375,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"file.show\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":376,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"file.edit\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":377,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"file.update\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":378,\\\"dominion_id\\\":78,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"file.destroy\\\",\\\"created_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-09T05:51:15.000000Z\\\"}\",\"{\\\"id\\\":379,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"homesetting.index\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":380,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"homesetting.create\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":381,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"homesetting.store\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":382,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"homesetting.show\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":383,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"homesetting.edit\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":384,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"homesetting.update\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":385,\\\"dominion_id\\\":79,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"homesetting.destroy\\\",\\\"created_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T13:53:34.000000Z\\\"}\",\"{\\\"id\\\":386,\\\"dominion_id\\\":79,\\\"guard\\\":null,\\\"name\\\":\\\"force_update\\\",\\\"route_name\\\":\\\"homesetting.force_update\\\",\\\"created_at\\\":\\\"2021-03-11T17:13:19.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:13:19.000000Z\\\"}\",\"{\\\"id\\\":387,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Index\\\",\\\"route_name\\\":\\\"gallery.index\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":388,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Create\\\",\\\"route_name\\\":\\\"gallery.create\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":389,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Store\\\",\\\"route_name\\\":\\\"gallery.store\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":390,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Show\\\",\\\"route_name\\\":\\\"gallery.show\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":391,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Edit\\\",\\\"route_name\\\":\\\"gallery.edit\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":392,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Update\\\",\\\"route_name\\\":\\\"gallery.update\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\",\"{\\\"id\\\":393,\\\"dominion_id\\\":80,\\\"guard\\\":\\\"admin\\\",\\\"name\\\":\\\"Destroy\\\",\\\"route_name\\\":\\\"gallery.destroy\\\",\\\"created_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\",\\\"updated_at\\\":\\\"2021-03-11T17:21:01.000000Z\\\"}\"]', NULL, '2021-03-11 11:21:20');
 
 -- --------------------------------------------------------
 
@@ -324,7 +435,57 @@ INSERT INTO `processes` (`id`, `dominion_id`, `guard`, `name`, `route_name`, `cr
 (340, 73, 'admin', 'Show', 'parishad.show', '2021-03-05 14:16:28', '2021-03-05 14:16:28'),
 (341, 73, 'admin', 'Edit', 'parishad.edit', '2021-03-05 14:16:28', '2021-03-05 14:16:28'),
 (342, 73, 'admin', 'Update', 'parishad.update', '2021-03-05 14:16:28', '2021-03-05 14:16:28'),
-(343, 73, 'admin', 'Destroy', 'parishad.destroy', '2021-03-05 14:16:28', '2021-03-05 14:16:28');
+(343, 73, 'admin', 'Destroy', 'parishad.destroy', '2021-03-05 14:16:28', '2021-03-05 14:16:28'),
+(344, 74, 'admin', 'Index', 'notice.index', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(345, 74, 'admin', 'Create', 'notice.create', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(346, 74, 'admin', 'Store', 'notice.store', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(347, 74, 'admin', 'Show', 'notice.show', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(348, 74, 'admin', 'Edit', 'notice.edit', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(349, 74, 'admin', 'Update', 'notice.update', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(350, 74, 'admin', 'Destroy', 'notice.destroy', '2021-03-08 23:39:53', '2021-03-08 23:39:53'),
+(351, 75, 'admin', 'Index', 'shava.index', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(352, 75, 'admin', 'Create', 'shava.create', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(353, 75, 'admin', 'Store', 'shava.store', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(354, 75, 'admin', 'Show', 'shava.show', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(355, 75, 'admin', 'Edit', 'shava.edit', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(356, 75, 'admin', 'Update', 'shava.update', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(357, 75, 'admin', 'Destroy', 'shava.destroy', '2021-03-08 23:40:37', '2021-03-08 23:40:37'),
+(358, 76, 'admin', 'Index', 'staff.index', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(359, 76, 'admin', 'Create', 'staff.create', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(360, 76, 'admin', 'Store', 'staff.store', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(361, 76, 'admin', 'Show', 'staff.show', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(362, 76, 'admin', 'Edit', 'staff.edit', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(363, 76, 'admin', 'Update', 'staff.update', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(364, 76, 'admin', 'Destroy', 'staff.destroy', '2021-03-08 23:45:31', '2021-03-08 23:45:31'),
+(365, 77, 'admin', 'Index', 'category.index', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(366, 77, 'admin', 'Create', 'category.create', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(367, 77, 'admin', 'Store', 'category.store', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(368, 77, 'admin', 'Show', 'category.show', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(369, 77, 'admin', 'Edit', 'category.edit', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(370, 77, 'admin', 'Update', 'category.update', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(371, 77, 'admin', 'Destroy', 'category.destroy', '2021-03-08 23:48:38', '2021-03-08 23:48:38'),
+(372, 78, 'admin', 'Index', 'file.index', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(373, 78, 'admin', 'Create', 'file.create', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(374, 78, 'admin', 'Store', 'file.store', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(375, 78, 'admin', 'Show', 'file.show', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(376, 78, 'admin', 'Edit', 'file.edit', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(377, 78, 'admin', 'Update', 'file.update', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(378, 78, 'admin', 'Destroy', 'file.destroy', '2021-03-08 23:51:15', '2021-03-08 23:51:15'),
+(379, 79, 'admin', 'Index', 'homesetting.index', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(380, 79, 'admin', 'Create', 'homesetting.create', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(381, 79, 'admin', 'Store', 'homesetting.store', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(382, 79, 'admin', 'Show', 'homesetting.show', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(383, 79, 'admin', 'Edit', 'homesetting.edit', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(384, 79, 'admin', 'Update', 'homesetting.update', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(385, 79, 'admin', 'Destroy', 'homesetting.destroy', '2021-03-11 07:53:34', '2021-03-11 07:53:34'),
+(386, 79, NULL, 'force_update', 'homesetting.force_update', '2021-03-11 11:13:19', '2021-03-11 11:13:19'),
+(387, 80, 'admin', 'Index', 'gallery.index', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(388, 80, 'admin', 'Create', 'gallery.create', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(389, 80, 'admin', 'Store', 'gallery.store', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(390, 80, 'admin', 'Show', 'gallery.show', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(391, 80, 'admin', 'Edit', 'gallery.edit', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(392, 80, 'admin', 'Update', 'gallery.update', '2021-03-11 11:21:01', '2021-03-11 11:21:01'),
+(393, 80, 'admin', 'Destroy', 'gallery.destroy', '2021-03-11 11:21:01', '2021-03-11 11:21:01');
 
 -- --------------------------------------------------------
 
@@ -347,6 +508,45 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `guard`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'admin', NULL, NULL),
 (2, 'Admin', 'admin', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shavas`
+--
+
+CREATE TABLE `shavas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`data`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `designation` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `father` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mother` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marriage_status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `chil_boy` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `chil_girl` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `joining_date` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `office_phone` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `personal_phone` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Priority` int(11) NOT NULL DEFAULT 50,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'avatar.png',
+  `status` enum('a','d') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'a',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -383,6 +583,12 @@ ALTER TABLE `admins`
   ADD UNIQUE KEY `admins_email_unique` (`email`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dominions`
 --
 ALTER TABLE `dominions`
@@ -395,6 +601,24 @@ ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `galleries`
+--
+ALTER TABLE `galleries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `home_settings`
+--
+ALTER TABLE `home_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `menus`
 --
 ALTER TABLE `menus`
@@ -404,6 +628,12 @@ ALTER TABLE `menus`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notices`
+--
+ALTER TABLE `notices`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -439,6 +669,18 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shavas`
+--
+ALTER TABLE `shavas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -462,10 +704,16 @@ ALTER TABLE `admins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `dominions`
 --
 ALTER TABLE `dominions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -474,16 +722,40 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `galleries`
+--
+ALTER TABLE `galleries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `home_settings`
+--
+ALTER TABLE `home_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `notices`
+--
+ALTER TABLE `notices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `parishads`
@@ -501,13 +773,25 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `processes`
 --
 ALTER TABLE `processes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=394;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shavas`
+--
+ALTER TABLE `shavas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

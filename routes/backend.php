@@ -49,6 +49,9 @@ Route::prefix('/admin')->group(function () {
             // ------------------file------------------
             Route::resource('homesetting',            'HomeSettingController');
             Route::put('home/{id}',            'HomeSettingController@forceUpdate')->name('homesetting.force_update');
+
+            // ------------------gallery------------------
+            Route::resource('gallery',            'GalleryController');
         });
 
         //------------------------------- Admin Crud -------------------------------
