@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Model\HomeSetting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-/*use App\Http\Controllers\Controller*/;
+use Illuminate\Support\Facades\Storage;
 
 class HomeSettingController extends Controller
 {
@@ -20,14 +20,14 @@ class HomeSettingController extends Controller
     {
         $query  = HomeSetting::latest();
 
-        if(!empty($request->field_name) && !empty($request->value)){
-            $query->where($request->field_name,'like','%'.$request->value.'%');
+        if (!empty($request->field_name) && !empty($request->value)) {
+            $query->where($request->field_name, 'like', '%' . $request->value . '%');
         }
 
         $breadcumbs = $this->breadcumbs($this->model, 'index');
         $datas      = $query->paginate(10);
 
-        return view( $this->path .'.index', compact('datas', 'breadcumbs'));
+        return view($this->path . '.index', compact('datas', 'breadcumbs'));
     }
 
     /**
@@ -38,7 +38,7 @@ class HomeSettingController extends Controller
     public function create()
     {
         $breadcumbs = $this->breadcumbs($this->model, 'create');
-        return view( $this->path . '.create', compact('breadcumbs'));
+        return view($this->path . '.create', compact('breadcumbs'));
     }
 
     /**
@@ -49,11 +49,35 @@ class HomeSettingController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation($request);
-        HomeSetting::create($request->all());
 
-        return redirect()->route( $this->route . '.index')
-                ->with('success', $this->model . ' successfully created');
+        // $this->validation($request);
+
+        $data = $request->input('home');
+
+        //Save logo
+        if (!empty($request->file('logo'))) {
+            $data['logo'] = Storage::putFile('upload/sites', $request->file('logo'));
+        }
+
+        //Save Mayor pic
+        if (!empty($request->file('mayor'))) {
+            $data['mayor_image'] = Storage::putFile('upload/sites', $request->file('mayor'));
+        }
+
+        //Save Cover pic
+        if (!empty($request->file('cover'))) {
+            $data['cover_pic'] = Storage::putFile('upload/sites', $request->file('cover'));
+        }
+
+        //Save Cover pic
+        if (!empty($request->file('android'))) {
+            $data['app_image'] = Storage::putFile('upload/sites', $request->file('android'));
+        }
+
+        HomeSetting::create($data);
+
+        return redirect()->route($this->route . '.index')
+            ->with('success', $this->model . ' successfully created');
     }
 
     /**
@@ -66,7 +90,7 @@ class HomeSettingController extends Controller
     {
         $breadcumbs = $this->breadcumbs($this->model, 'show');
 
-        return view($this->path .'.show', compact( "homeSetting", "breadcumbs"));
+        return view($this->path . '.show', compact("homeSetting", "breadcumbs"));
     }
 
     /**
@@ -78,8 +102,39 @@ class HomeSettingController extends Controller
     public function edit(HomeSetting $homeSetting)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'edit');
-        return view( $this->path . '.edit',
-                compact( "homeSetting" , "breadcumbs"));
+        return view(
+            $this->path . '.edit',
+            compact("homeSetting", "breadcumbs")
+        );
+    }
+
+    public function forceUpdate(Request $request, $id)
+    {
+        $homeSetting = HomeSetting::find($id);
+
+        $data = $request->input('home');
+
+        //Save logo
+        if (!empty($request->file('logo'))) {
+            $data['logo'] = Storage::putFile('upload/sites', $request->file('logo'));
+        }
+
+        //Save Mayor pic
+        if (!empty($request->file('mayor'))) {
+            $data['mayor_image'] = Storage::putFile('upload/sites', $request->file('mayor'));
+        }
+
+        //Save Cover pic
+        if (!empty($request->file('cover'))) {
+            $data['cover_pic'] = Storage::putFile('upload/sites', $request->file('cover'));
+        }
+
+        //Save Cover pic
+        if (!empty($request->file('android'))) {
+            $data['app_image'] = Storage::putFile('upload/sites', $request->file('android'));
+        }
+        $homeSetting->update($data);
+        return redirect()->back()->with('success', $this->model . ' Updated Successfully');
     }
 
     /**
@@ -90,21 +145,8 @@ class HomeSettingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, HomeSetting $homeSetting)
-    {   $data = $request->input('home');
-
-        dd( $data);
-        $homeSetting->update([
-            "site_name" => "test site",
-            "fb_url" => "test data",
-            "twiter_url" => "test data",
-            "linkdin_url" => "test data",
-            "google_url" => "test data",
-            "youtube_url" => "test data",
-            "mayor_name" => "test data",
-            "address" => "test data",
-            "app_url" => "test data",
-        ]);
-        return redirect()->back()->with('success', $this->model. ' Updated Successfully');
+    {
+        return redirect()->back()->with('success', $this->model . ' Updated Successfully');
     }
 
     /**
@@ -116,8 +158,8 @@ class HomeSettingController extends Controller
     public function destroy(HomeSetting $homeSetting)
     {
         $homeSetting->delete();
-        return redirect()->route( $this->route . '.index')
-                ->with('success', $this->model .' deleted');
+        return redirect()->route($this->route . '.index')
+            ->with('success', $this->model . ' deleted');
     }
 
     public function __construct()
@@ -127,8 +169,9 @@ class HomeSettingController extends Controller
         $this->route = "homesetting";
     }
 
-    private function validation($request, $homeSetting = null){
-        $this->validate($request,[
+    private function validation($request, $homeSetting = null)
+    {
+        $this->validate($request, [
             'name'  => "required|unique:homeSettings,name," . $homeSetting
         ]);
     }
