@@ -49,27 +49,22 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        if($request -> hasFile('photo')){
+        if ($request->hasFile('photo')) {
 
-            $count = count($request -> photo);
-            $imag = $request -> photo;
+            $count = count($request->photo);
+            $imag = $request->photo;
 
-           for ($i=0; $i < $count; $i++) {
+            for ($i = 0; $i < $count; $i++) {
 
-                    $data= Storage::putFile('upload/Gallerys', $imag[$i]);
-                    //$this->validation($request);
-                    Gallery::create(['image' => $data]);
-
-                    }
-                    return redirect()->route( $this->route . '.index')
-                            ->with('success', $this->model . ' successfully created');
-        }else{
-                return redirect()->route( $this->route . '.create')
-                        ->with('error', $this->model . 'Image Fild is empty');
+                $data = Storage::putFile('upload/Gallerys', $imag[$i]);
+                Gallery::create(['image' => $data]);
             }
-
-
-
+            return redirect()->route($this->route . '.index')
+                ->with('success', $this->model . ' successfully created');
+        } else {
+            return redirect()->route($this->route . '.create')
+                ->with('error', $this->model . 'Image Fild is empty');
+        }
     }
 
     /**
@@ -113,9 +108,9 @@ class GalleryController extends Controller
             $data = Storage::putFile('upload/Gallerys', $request->file('image'));
 
             $gallery->update(['image' => $data]);
-            return redirect()->back()->with('success', $this->model. ' Updated Successfully');
-        }else{
-            return redirect()->back()->with('error', $this->model. 'Nothing to update');
+            return redirect()->back()->with('success', $this->model . ' Updated Successfully');
+        } else {
+            return redirect()->back()->with('error', $this->model . 'Nothing to update');
         }
         // $this->validation($request, $gallery->id);
         // $gallery->update($request->all());
@@ -147,5 +142,28 @@ class GalleryController extends Controller
         $this->validate($request, [
             'name'  => "required|unique:gallerys,name," . $gallery
         ]);
+    }
+
+    public function position()
+    {
+        $galleries = Gallery::orderby('serial', 'ASC')->get();
+        return view($this->path . '.position', compact("galleries"));
+    }
+
+    public function savePosition(Request $request)
+    {
+
+        if (!empty($request->position) && count($request->position) > 0) {
+            foreach ($request->position as $id => $position) {
+
+                $gallery = Gallery::where('id', $id)->first();
+
+                $gallery->update([
+                    'serial' => $position
+                ]);
+            }
+            return redirect()->back()->with('success', "position updated");
+        }
+        return redirect()->back()->with('error', "something is wrong");
     }
 }

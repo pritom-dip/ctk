@@ -67,6 +67,22 @@ $(function () {
 
     $(".menu-activated").parents('.treeview').addClass('menu-open active');
 
+
+
+    $(document).ready(function () {
+        var list = $('#mySortable'),
+            updatePosition = function () {
+                list.children().each(function (i, e) {
+                    $(this).children('input[type="hidden"]').val(++i);
+                });
+            };
+
+        list.sortable({
+            placeholder: "ui-state-highlight",
+            update: updatePosition
+        });
+    });
+
 });
 
 //===========Check All==================
@@ -76,7 +92,7 @@ $(document).on("change", "#checkAll", function () {
 });
 
 // uplode photo view
-$(document).on('change','input.upload_image',function(e){
+$(document).on('change', 'input.upload_image', function (e) {
     // pageLeave("true")
     e.preventDefault()
     let id = $(this).attr('code')
@@ -84,8 +100,8 @@ $(document).on('change','input.upload_image',function(e){
 
     let product_photo = URL.createObjectURL(e.target.files[0])
 
-    $("#new_"+id).attr('value',1)
-    $('#'+id).attr('src',product_photo)
+    $("#new_" + id).attr('value', 1)
+    $('#' + id).attr('src', product_photo)
 });
 
 

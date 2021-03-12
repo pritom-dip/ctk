@@ -21,40 +21,45 @@ Route::prefix('/admin')->group(function () {
         // ------------------Backend all portion------------------
         Route::namespace('Backend')->group(function () {
             // ------------------Role------------------
-            Route::resource('role',            'RoleController');
+            Route::resource('role',                 'RoleController');
             // ------------------Dominion------------------
-            Route::resource('dominion',        'DominionController');
+            Route::resource('dominion',             'DominionController');
             // ------------------Process------------------
-            Route::resource('process',         'ProcessController');
+            Route::resource('process',              'ProcessController');
             // ------------------Permission------------------
-            Route::resource('permission',      'PermissionController'); // ------------------Menu------------------
-            Route::resource('menu',            'MenuController');
-            Route::post('menuprocess',          'MenuController@menuProcess')->name('menu.processondominion');
+            Route::resource('permission',           'PermissionController'); // ------------------Menu------------------
+            Route::resource('menu',                 'MenuController');
+            Route::post('menuprocess',              'MenuController@menuProcess')->name('menu.processondominion');
 
             // ------------------About------------------
-            Route::resource('about',            'AboutController');
+            Route::resource('about',                'AboutController');
             // ------------------Parishad------------------
-            Route::resource('parishad',            'ParishadController');
+            Route::resource('parishad',             'ParishadController');
             // ------------------Staff------------------
-            Route::resource('staff',            'StaffController');
+            Route::resource('staff',                'StaffController');
             // ------------------Shava------------------
-            Route::resource('shava',            'ShavaController');
+            Route::resource('shava',                'ShavaController');
             // ------------------category------------------
-            Route::resource('category',            'CategoryController');
+            Route::resource('category',             'CategoryController');
 
             // ------------------file------------------
-            Route::resource('file',            'FileController');
+            Route::resource('file',                 'FileController');
             // ------------------nptice------------------
-            Route::resource('notice',            'NoticeController');
+            Route::resource('notice',               'NoticeController');
             // ------------------file------------------
-            Route::resource('homesetting',            'HomeSettingController');
-            Route::put('home/{id}',            'HomeSettingController@forceUpdate')->name('homesetting.force_update');
+            Route::resource('homesetting',          'HomeSettingController');
+            Route::put('home/{id}',                 'HomeSettingController@forceUpdate')->name('homesetting.force_update');
 
             // ------------------gallery------------------
-            Route::resource('gallery',            'GalleryController');
+            Route::resource('gallery',              'GalleryController');
+            Route::get('/position/gallery',         'GalleryController@position')->name('gallery.position');
+            Route::post('/position/gallery',        'GalleryController@savePosition')->name('gallery.savePosition');
+
             // ------------------slider------------------
-            Route::resource('slider',            'SliderController');
+            Route::resource('slider',               'SliderController');
         });
+
+
 
         //------------------------------- Admin Crud -------------------------------
         Route::resource('admin',               'AdminController');

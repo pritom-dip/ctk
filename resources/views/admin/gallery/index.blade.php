@@ -16,13 +16,12 @@
 
     <!-- /.box-header -->
     <div class="box-body box-min-height">
-        <div class="table-responsive col-md-8">
+        <div class="table-responsive col-md-12">
             <table class="table table-bordered table-hover table-striped list-data">
                 <thead class="bg-purple text-white">
                     <tr>
                         <th class="serial">#</th>
-                        <th style="width: 180px;">Slider Image</th>
-
+                        <th style="width: 180px;">Gallery Image</th>
 
                         <th class="action">Action</th>
                     </tr>

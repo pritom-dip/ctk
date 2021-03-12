@@ -17,60 +17,71 @@ use Illuminate\Http\Request;
 class forntendController extends Controller
 {
     // ---------home-----------
-    public function home(){
-        $slider = Slider::latest() -> get();
-        $gallery = Gallery::latest() -> get();
-        $notice = Notice::latest() -> get();
-        $about = About::latest() -> first();
-        return view('frontend.index',compact('about','notice','slider','gallery'));
+    public function home()
+    {
+        $slider = Slider::latest()->get();
+        $gallery = Gallery::orderby('serial', 'ASC')->get();
+        $notice = Notice::latest()->get();
+        $about = About::latest()->first();
+        return view('frontend.index', compact('about', 'notice', 'slider', 'gallery'));
     }
     // ---------about-----------
-    public function about(){
-        $about = About::latest() -> first();
+    public function about()
+    {
+        $about = About::latest()->first();
 
-        return view('frontend.about',compact('about'));
+        return view('frontend.about', compact('about'));
     }
     // ---------structure-----------
-    public function structure(){
+    public function structure()
+    {
         return view('frontend.structure');
     }
     // ---------parishad-----------
-    public function parishad(){
+    public function parishad()
+    {
         $parishad = Parishad::all();
-        return view('frontend.parishad',compact('parishad'));
+        return view('frontend.parishad', compact('parishad'));
     }
     // ---------staff-----------
-    public function staff(){
+    public function staff()
+    {
         $staff = Staff::all();
-        return view('frontend.staff',compact('staff'));
+        return view('frontend.staff', compact('staff'));
     }
     // ---------service-----------
-    public function service(){
-        $service = Shava::latest() -> first();
-        return view('frontend.service',compact('service'));
+    public function service()
+    {
+        $service = Shava::latest()->first();
+        return view('frontend.service', compact('service'));
     }
     // ---------notice-----------
-    public function notice(){
-        $notice = Notice::latest() -> get();
-        return view('frontend.notice',compact('notice'));
+    public function notice()
+    {
+        $notice = Notice::latest()->get();
+        return view('frontend.notice', compact('notice'));
     }
     // ---------notice single-----------
-    public function noticeSingle($id){
+    public function noticeSingle($id)
+    {
         $data = Notice::find($id);
-        return view('frontend.notice-single',compact('data'));
+        return view('frontend.notice-single', compact('data'));
     }
     // ---------download-----------
-    public function download(){
-        $category = Category:: all();
-        return view('frontend.download',compact('category'));
+    public function download()
+    {
+        $category = Category::all();
+        return view('frontend.download', compact('category'));
     }
     // ---------file view-----------
-    public function fileView($id){
+    public function fileView($id)
+    {
         $data = File::find($id);
-        return view('frontend.download-view',compact('data'));
+        return view('frontend.download-view', compact('data'));
     }
     // ---------contact-----------
-    public function contact(){
+    public function contact()
+    {
         return view('frontend.contact');
     }
 }
