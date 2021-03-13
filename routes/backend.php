@@ -61,6 +61,8 @@ Route::prefix('/admin')->group(function () {
 
             // ------------------slider------------------
             Route::resource('slider',               'SliderController');
+            // ------------------Structure------------------
+            Route::resource('structure',               'StructureController');
         });
 
 

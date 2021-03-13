@@ -9,7 +9,10 @@
                     <div class="card-body">
 
 
-                        <img src="images/struture.jpg" width="100%"/>
+                            <img src="{{ asset('storage/'. $structure ->image) }}" width="100%"/>
+
+
+
 
                     </div>
                 </div>

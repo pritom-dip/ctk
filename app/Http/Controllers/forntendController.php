@@ -12,6 +12,7 @@ use App\Model\Parishad;
 use App\Model\Shava;
 use App\Model\Slider;
 use App\Model\Staff;
+use App\Model\Structure;
 use Illuminate\Http\Request;
 
 class forntendController extends Controller
@@ -35,7 +36,9 @@ class forntendController extends Controller
     // ---------structure-----------
     public function structure()
     {
-        return view('frontend.structure');
+        $structure = Structure::latest()->first();
+
+        return view('frontend.structure',compact('structure'));
     }
     // ---------parishad-----------
     public function parishad()
@@ -84,4 +87,7 @@ class forntendController extends Controller
     {
         return view('frontend.contact');
     }
+
+
+
 }
