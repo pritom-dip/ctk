@@ -6,7 +6,7 @@ use App\Model\Staff;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-/*use App\Http\Controllers\Controller*/;
+    /*use App\Http\Controllers\Controller*/;
 
 class StaffController extends Controller
 {
@@ -19,16 +19,16 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        $query  = Staff::latest() ->where('status', 'a');
+        $query  = Staff::latest()->where('status', 'a');
 
-        if(!empty($request->field_name) && !empty($request->value)){
-            $query->where($request->field_name,'like','%'.$request->value.'%');
+        if (!empty($request->field_name) && !empty($request->value)) {
+            $query->where($request->field_name, 'like', '%' . $request->value . '%');
         }
 
         $breadcumbs = $this->breadcumbs($this->model, 'index');
         $staffs      = $query->paginate(10);
 
-        return view( $this->path .'.index', compact('staffs', 'breadcumbs'));
+        return view($this->path . '.index', compact('staffs', 'breadcumbs'));
     }
 
     /**
@@ -39,7 +39,7 @@ class StaffController extends Controller
     public function create()
     {
         $breadcumbs = $this->breadcumbs($this->model, 'create');
-        return view( $this->path . '.create', compact('breadcumbs'));
+        return view($this->path . '.create', compact('breadcumbs'));
     }
 
     /**
@@ -55,11 +55,11 @@ class StaffController extends Controller
         if (!empty($request->file('image'))) {
             $data['image'] = Storage::putFile('upload/staff', $request->file('image'));
         }
-       // $this->validation($request);
+        // $this->validation($request);
         Staff::create($data);
 
-        return redirect()->route( $this->route . '.index')
-                ->with('success', $this->model . ' successfully created');
+        return redirect()->route($this->route . '.index')
+            ->with('success', $this->model . ' successfully created');
     }
 
     /**
@@ -72,7 +72,7 @@ class StaffController extends Controller
     {
         $breadcumbs = $this->breadcumbs($this->model, 'show');
 
-        return view($this->path .'.show', compact( "staff", "breadcumbs"));
+        return view($this->path . '.show', compact("staff", "breadcumbs"));
     }
 
     /**
@@ -84,8 +84,10 @@ class StaffController extends Controller
     public function edit(Staff $staff)
     {
         $breadcumbs = $this->breadcumbs($this->model, 'edit');
-        return view( $this->path . '.edit',
-                compact( "staff" , "breadcumbs"));
+        return view(
+            $this->path . '.edit',
+            compact("staff", "breadcumbs")
+        );
     }
 
     /**
@@ -96,14 +98,15 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Staff $staff)
-    {   $data = $request->input('staff');
+    {
+        $data = $request->input('staff');
         if (!empty($request->file('image'))) {
             $deleteImage  = $this->deleteOldImage($staff);
             $data['image'] = Storage::putFile('upload/staff', $request->file('image'));
         }
         //$this->validation($request, $staff->id);
         $staff->update($data);
-        return redirect()->back()->with('success', $this->model. ' Updated Successfully');
+        return redirect()->back()->with('success', $this->model . ' Updated Successfully');
     }
 
     /**
@@ -115,8 +118,8 @@ class StaffController extends Controller
     public function destroy(Staff $staff)
     {
         $staff->update(['status' => 'd']);
-        return redirect()->route( $this->route . '.index')
-                ->with('success', $this->model .' deleted');
+        return redirect()->route($this->route . '.index')
+            ->with('success', $this->model . ' deleted');
     }
 
     public function __construct()
@@ -126,8 +129,9 @@ class StaffController extends Controller
         $this->route = "staff";
     }
 
-    private function validation($request, $staff = null){
-        $this->validate($request,[
+    private function validation($request, $staff = null)
+    {
+        $this->validate($request, [
             'staff.name'  => "required:staffs,name," . $staff
         ]);
     }
@@ -138,5 +142,27 @@ class StaffController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function position()
+    {
+        $staffs = Staff::orderby('serial', 'ASC')->get();
+        return view($this->path . '.position', compact("staffs"));
+    }
+
+    public function savePosition(Request $request)
+    {
+        if (!empty($request->position) && count($request->position) > 0) {
+            foreach ($request->position as $id => $position) {
+
+                $staff = Staff::where('id', $id)->first();
+
+                $staff->update([
+                    'serial' => $position
+                ]);
+            }
+            return redirect()->back()->with('success', "Staff updated");
+        }
+        return redirect()->back()->with('error', "something is wrong");
     }
 }

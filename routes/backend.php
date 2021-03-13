@@ -39,6 +39,8 @@ Route::prefix('/admin')->group(function () {
             Route::post('/position/parishad',        'ParishadController@savePosition')->name('parishad.savePosition');
             // ------------------Staff------------------
             Route::resource('staff',                'StaffController');
+            Route::get('/position/staff',         'StaffController@position')->name('staff.position');
+            Route::post('/position/staff',        'StaffController@savePosition')->name('staff.savePosition');
             // ------------------Shava------------------
             Route::resource('shava',                'ShavaController');
             // ------------------category------------------

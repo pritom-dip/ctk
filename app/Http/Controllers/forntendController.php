@@ -46,7 +46,7 @@ class forntendController extends Controller
     // ---------staff-----------
     public function staff()
     {
-        $staff = Staff::all();
+        $staff = Staff::orderby('serial', 'ASC')->get();
         return view('frontend.staff', compact('staff'));
     }
     // ---------service-----------
