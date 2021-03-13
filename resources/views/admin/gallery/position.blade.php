@@ -10,7 +10,7 @@
             <span class="box-title">Gallery Position</span>
         </div>
 
-        @if(App\Model\Permission::roleHasSpecificPermission('category.index'))
+        @if(App\Model\Permission::roleHasSpecificPermission('gallery.index'))
 
         <div class="box-tools pull-right">
             <a href="{{route('gallery.index')}}" class="btn btn-xs btn-success pull-left text-white" title="Add New"><i class="fa fa-arrow-left"></i> <span class="text-capitalize">back</span></a>

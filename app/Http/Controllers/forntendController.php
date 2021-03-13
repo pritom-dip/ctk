@@ -40,7 +40,7 @@ class forntendController extends Controller
     // ---------parishad-----------
     public function parishad()
     {
-        $parishad = Parishad::all();
+        $parishad = Parishad::orderby('serial', 'ASC')->get();
         return view('frontend.parishad', compact('parishad'));
     }
     // ---------staff-----------

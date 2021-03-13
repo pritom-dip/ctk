@@ -149,4 +149,26 @@ class ParishadController extends Controller
         }
         return false;
     }
+
+    public function position()
+    {
+        $parishads = Parishad::orderby('serial', 'ASC')->get();
+        return view($this->path . '.position', compact("parishads"));
+    }
+
+    public function savePosition(Request $request)
+    {
+        if (!empty($request->position) && count($request->position) > 0) {
+            foreach ($request->position as $id => $position) {
+
+                $parishad = Parishad::where('id', $id)->first();
+
+                $parishad->update([
+                    'serial' => $position
+                ]);
+            }
+            return redirect()->back()->with('success', "Parishad updated");
+        }
+        return redirect()->back()->with('error', "something is wrong");
+    }
 }
