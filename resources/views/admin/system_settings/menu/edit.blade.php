@@ -31,7 +31,7 @@
                                 <option value="">Please select</option>
                                 @if(!empty($parentMenus))
                                 @foreach( $parentMenus as $parentMenu )
-                                <option value="{{$parentMenu->id}}" @if ($parentMenu->id ==$menu->parent_id) selected @endif>{{$menu->name}}</option>
+                                <option value="{{$parentMenu->id}}" @if ($parentMenu->id ==$menu->parent_id) selected @endif>{{$parentMenu->name}}</option>
                                 @endforeach
                                 @endif
                             </select>

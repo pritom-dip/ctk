@@ -55,7 +55,7 @@ class ParishadController extends Controller
 
         //Save feature image
         if (!empty($request->file('image'))) {
-            $data['image'] = Storage::putFile('upload/image', $request->file('image'));
+            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
         }
 
         Parishad::create($data);
@@ -107,7 +107,7 @@ class ParishadController extends Controller
         //Save feature image
         if (!empty($request->file('image'))) {
             $deleteImage  = $this->deleteOldImage($parishad);
-            $data['image'] = Storage::putFile('upload/image', $request->file('image'));
+            $data['image'] = Storage::putFile('upload/parishad', $request->file('image'));
         }
 
         $parishad->update($data);
@@ -144,9 +144,31 @@ class ParishadController extends Controller
     private function deleteOldImage($parishad)
     {
         if ($parishad->image) {
-            Storage::delete('/public/images/' . $parishad->image);
+            Storage::delete('/public/parishad/' . $parishad->image);
             return true;
         }
         return false;
+    }
+
+    public function position()
+    {
+        $parishads = Parishad::orderby('serial', 'ASC')->get();
+        return view($this->path . '.position', compact("parishads"));
+    }
+
+    public function savePosition(Request $request)
+    {
+        if (!empty($request->position) && count($request->position) > 0) {
+            foreach ($request->position as $id => $position) {
+
+                $parishad = Parishad::where('id', $id)->first();
+
+                $parishad->update([
+                    'serial' => $position
+                ]);
+            }
+            return redirect()->back()->with('success', "Parishad updated");
+        }
+        return redirect()->back()->with('error', "something is wrong");
     }
 }

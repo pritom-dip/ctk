@@ -25,8 +25,7 @@
                     <td>{{ $parishad->designation }}</td>
                     <td>{{ $parishad->fathers_name }}</td>
                     <td>{{ $parishad->cell }}</td>
-                    <td><img src={{$parishad->image}}/></td>
-                    
+                    <td><img src={{ asset('storage/'. $parishad->image) }} style="width: 100px;"></td>
                 </tr>
             </tbody>
         </table>

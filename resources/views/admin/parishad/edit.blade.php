@@ -58,10 +58,19 @@
                             </div>
                         </div>
                         <!------------ Single Input ------------>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Address</label>
+                                <input type="text" value="{{$parishad->address}}" name="parishad[address]" class="form-control" />
+                            </div>
+                        </div>
+                        <!------------ Single Input ------------>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Image</label>
-                                <input type="file" value="{{$parishad->image}}" name="image" class="form-control" />
+                                @if(!empty($parishad->image))
+                                <label  for="pro_pic"><img id="up_44" width="150px" height="150px" style="cursor: pointer; border: 2px solid #3C8DBC; padding: 4px;" src="{{ asset('storage/'. $parishad->image) }}" width="150px" alt=""></label>
+                                @endif
+                                <input name="image" id="pro_pic" class="upload_image" code="up_44"  type="file" >
                             </div>
                         </div>
 

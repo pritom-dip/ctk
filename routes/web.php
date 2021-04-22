@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
@@ -39,3 +37,18 @@ Route::get('/cache', function () {
     Artisan::call('view:cache');
     return "cache!";
 });
+
+
+// front end routes
+
+Route::get('/', 'forntendController@home')->name('home');
+Route::get('/about', 'forntendController@about')->name('about');
+Route::get('/structure', 'forntendController@structure')->name('structure');
+Route::get('/parishad', 'forntendController@parishad')->name('parishad');
+Route::get('/staff', 'forntendController@staff')->name('staff');
+Route::get('/service', 'forntendController@service')->name('service');
+Route::get('/notice', 'forntendController@notice')->name('notice');
+Route::get('/notice-single/{id}', 'forntendController@noticeSingle')->name('notice.single');
+Route::get('/download', 'forntendController@download')->name('download');
+Route::get('/file/view/{id}', 'forntendController@fileView')->name('file.view');
+Route::get('/contact', 'forntendController@contact')->name('contact');
